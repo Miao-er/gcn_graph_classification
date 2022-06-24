@@ -16,21 +16,21 @@ from models import GCN
 parser = argparse.ArgumentParser()
 parser.add_argument('--no-cuda', action='store_true', default=False, #默认不使用cuda
                     help='Disables CUDA training.')
-parser.add_argument('--fastmode', action='store_true', default=False, #默认使用验证集
-                    help='Validate during training pass.')
 parser.add_argument('--seed', type=int, default=42, help='Random seed.') #随机种子
-parser.add_argument('--epochs', type=int, default=10,  #训练epoch
+parser.add_argument('--epochs', type=int, default=20,  #训练epoch
                     help='Number of epochs to train.')
-parser.add_argument('--lr', type=float, default=0.01, #学习率
+parser.add_argument('--lr', type=float, default=0.05, #学习率
                     help='Initial learning rate.')
 parser.add_argument('--weight_decay', type=float, default=5e-4, #权重衰减
                     help='Weight decay (L2 loss on parameters).')
-parser.add_argument('--hidden', type=int, default=16, #隐藏层单元（维度）
+parser.add_argument('--hidden', type=int, default=16,#隐藏层单元（维度）
                     help='Number of hidden units.')
 parser.add_argument('--dropout', type=float, default=0.5, 
                     help='Dropout rate (1 - keep probability).')
-parser.add_argument('--batch_size', type=int, default=16, 
+parser.add_argument('--batch_size', type=int, default=64, 
                     help='batch size.')
+parser.add_argument('--knn_param', type=int, default=50, 
+                    help='top-k nearest neighbors.')
 
 args = parser.parse_args()
 args.cuda = not args.no_cuda and torch.cuda.is_available()
@@ -64,11 +64,10 @@ def train(epoch):
         t = time.time()
         model.train()
         optimizer.zero_grad()
-        adj_matrix = build_graph(data)
         if args.cuda:
             data = data.cuda()
             labels = labels.cuda()
-            adj_matrix = adj_matrix.cuda()
+        adj_matrix = build_graph(data, k = args.knn_param)
         output = model(data, adj_matrix)
         loss_train = F.nll_loss(output, labels)
         acc_train = accuracy(output, labels)
@@ -78,7 +77,7 @@ def train(epoch):
         all_acc.append(acc_train)
         all_loss.append(loss_train)
         iter += 1
-        if iter % 50 == 49:
+        if iter % 20 == 19:
             print('iter:{:04d}'.format(iter + 1),
                 'loss_train: {:.4f}'.format(loss_train.item()),
                 'acc_train: {:.4f}'.format(acc_train.item()),
@@ -94,11 +93,10 @@ def test():
     all_loss = []
     for data,labels in train_loader:
         t = time.time()
-        adj_matrix = build_graph(data)
         if args.cuda:
             data = data.cuda()
             labels = labels.cuda()
-            adj_matrix = adj_matrix.cuda()
+        adj_matrix = build_graph(data,k = args.knn_param)
         output = model(data, adj_matrix) #batch_size * nclass
         loss_test = F.nll_loss(output, labels)
         acc_test = accuracy(output, labels)
