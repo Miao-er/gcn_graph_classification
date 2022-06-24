@@ -11,7 +11,7 @@ class GraphConvolution(Module):
     Simple GCN layer, similar to https://arxiv.org/abs/1609.02907
     """
 
-    def __init__(self,in_features, out_features, bias=True):
+    def __init__(self, in_features, out_features, bias=True):
         super(GraphConvolution, self).__init__()
         self.in_features = in_features
         self.out_features = out_features
@@ -29,8 +29,8 @@ class GraphConvolution(Module):
             self.bias.data.uniform_(-stdv, stdv)
 
     def forward(self, input, adj):
-        support = torch.matmul(input, self.weight) #batch_szie * 2048 * feature_dim
-        output = torch.bmm(adj, support) #batch_size * 2048 * 2048
+        support = torch.mm(input, self.weight)
+        output = torch.spmm(adj, support)
         if self.bias is not None:
             return output + self.bias
         else:

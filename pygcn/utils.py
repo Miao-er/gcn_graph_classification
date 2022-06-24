@@ -1,80 +1,136 @@
+from re import A
 import numpy as np
 import scipy.sparse as sp
+from sklearn.utils import shuffle
 import torch
+import os
+import glob
+import h5py
+import numpy as np
+from torch.utils.data import Dataset
+from torch.utils.data import DataLoader
+from yaml import load
 
 
-def encode_onehot(labels):
-    classes = set(labels)
-    classes_dict = {c: np.identity(len(classes))[i, :] for i, c in
-                    enumerate(classes)}
-    labels_onehot = np.array(list(map(classes_dict.get, labels)),
-                             dtype=np.int32)
-    return labels_onehot
+def download():
+    PATH = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    DATA_DIR = PATH + '/data/modelnet40_ply_hdf5_2048'
+    if not os.path.exists(DATA_DIR):
+        www = 'https://shapenet.cs.stanford.edu/media/modelnet40_ply_hdf5_2048.zip'
+        zipfile = os.path.basename(www)
+        os.system('wget %s; unzip %s' % (www, zipfile))
+        os.system('mv %s %s' % (zipfile[:-4], DATA_DIR))
+        os.system('rm %s' % (zipfile))
+    return DATA_DIR
 
 
-def load_data(path="../data/cora/", dataset="cora"):
-    """Load citation network dataset (cora only for now)"""
-    print('Loading {} dataset...'.format(dataset))
+def load_raw_data(partition):
+    '''
+    train:9840
+    test:2468
+    label class:40
+    '''
+    DATA_DIR = download()
+    all_data = []
+    all_label = []
+    for h5_name in glob.glob(os.path.join(DATA_DIR, 'ply_data_%s*.h5'%partition)):
+        f = h5py.File(h5_name)
+        data = f['data'][:].astype('float32') #2048,2048,3
+        label = f['label'][:].astype('int64') #2048,1
+        f.close()
+        all_data.append(data)
+        all_label.append(label)
+    all_data = np.concatenate(all_data, axis=0)
+    all_label = np.concatenate(all_label, axis=0)
+    return all_data, all_label 
 
-    idx_features_labels = np.genfromtxt("{}{}.content".format(path, dataset),
-                                        dtype=np.dtype(str))
-    features = sp.csr_matrix(idx_features_labels[:, 1:-1], dtype=np.float32)
-    labels = encode_onehot(idx_features_labels[:, -1])
 
-    # build graph
-    idx = np.array(idx_features_labels[:, 0], dtype=np.int32)
-    idx_map = {j: i for i, j in enumerate(idx)}
-    edges_unordered = np.genfromtxt("{}{}.cites".format(path, dataset),
-                                    dtype=np.int32)
-    edges = np.array(list(map(idx_map.get, edges_unordered.flatten())),
-                     dtype=np.int32).reshape(edges_unordered.shape)
-    adj = sp.coo_matrix((np.ones(edges.shape[0]), (edges[:, 0], edges[:, 1])),
-                        shape=(labels.shape[0], labels.shape[0]),
-                        dtype=np.float32)
+def translate_pointcloud(pointcloud):
+    xyz1 = np.random.uniform(low=2./3., high=3./2., size=[3])
+    xyz2 = np.random.uniform(low=-0.2, high=0.2, size=[3])
+       
+    translated_pointcloud = np.add(np.multiply(pointcloud, xyz1), xyz2).astype('float32')
+    return translated_pointcloud
 
-    # build symmetric adjacency matrix
-    adj = adj + adj.T.multiply(adj.T > adj) - adj.multiply(adj.T > adj)
 
-    features = normalize(features)
-    adj = normalize(adj + sp.eye(adj.shape[0]))
+class ModelNet40(Dataset):
+    def __init__(self, num_points, partition='train'):
+        self.data, self.label = load_raw_data(partition)
+        self.label = self.label.squeeze(1)
+        self.num_points = num_points
+        self.partition = partition        
 
-    idx_train = range(140)
-    idx_val = range(200, 500)
-    idx_test = range(500, 1500)
+    def __getitem__(self, item):
+        pointcloud = self.data[item][:self.num_points]
+        label = self.label[item]
+        if self.partition == 'train':
+            pointcloud = translate_pointcloud(pointcloud)
+            np.random.shuffle(pointcloud)
+        return pointcloud, label
 
-    features = torch.FloatTensor(np.array(features.todense()))
-    labels = torch.LongTensor(np.where(labels)[1])
-    adj = sparse_mx_to_torch_sparse_tensor(adj)
+    def __len__(self):
+        return self.data.shape[0]
 
-    idx_train = torch.LongTensor(idx_train)
-    idx_val = torch.LongTensor(idx_val)
-    idx_test = torch.LongTensor(idx_test)
 
-    return adj, features, labels, idx_train, idx_val, idx_test
 
+def load_data(batch_size):
+    '''
+    点云数据记载
+    '''
+    train = ModelNet40(2048,'train')
+    test = ModelNet40(2048, 'test') 
+    train_loader = DataLoader(dataset=train,batch_size = batch_size,shuffle = True)
+    test_loader = DataLoader(dataset=test,batch_size = batch_size)
+
+    return train_loader,test_loader
+
+def knn(x, k):
+    inner = -2*torch.matmul(x,x.transpose(2, 1))
+    xx = torch.sum(x**2, dim=2, keepdim=True) # batch_size * num_point * 1
+    pairwise_distance = -xx - inner - xx.transpose(2, 1) # (a-b)^2 = a^2 + b^2 -2ab
+ 
+    val,idx = pairwise_distance.topk(k=k, dim=-1)   # (batch_size, num_points, k)
+    weight = torch.exp(pairwise_distance)
+    batch_size,num_points,feat_dim = x.shape
+    idx = idx.reshape(batch_size * num_points,-1)
+    idx_base = torch.arange(0,batch_size * num_points).view(-1,1)*num_points
+    idx = (idx + idx_base).reshape(-1)
+    weight = weight.reshape(-1)
+    mask = torch.zeros_like(weight).bool()
+    mask[idx] = True
+    weight[~mask] = 0
+    weight = weight.reshape(batch_size,num_points,num_points)
+    return weight,idx
+
+def build_graph(batch_data):
+    '''
+
+    返回邻接矩阵
+    data:batch_size * 2048 * features
+    '''
+    adj,idx = knn(batch_data,k = 10)
+    adj_T = adj.transpose(2,1)
+    adj = adj + adj_T.mul(adj_T > adj) - adj.mul(adj_T > adj)
+    adj = normalize(adj +torch.eye(adj.shape[1]))
+    return adj
+    
 
 def normalize(mx):
     """Row-normalize sparse matrix"""
-    rowsum = np.array(mx.sum(1))
-    r_inv = np.power(rowsum, -1).flatten()
-    r_inv[np.isinf(r_inv)] = 0.
-    r_mat_inv = sp.diags(r_inv)
-    mx = r_mat_inv.dot(mx)
+    rowsum = mx.sum(dim = 2)
+    r_inv = torch.pow(rowsum, -1)
+    r_inv[torch.isinf(r_inv)] = 0.
+    rr_inv = torch.pow(r_inv,0.5)
+    mx = rr_inv.unsqueeze(-1).mul(mx).mul(rr_inv.unsqueeze(1))
     return mx
-
 
 def accuracy(output, labels):
     preds = output.max(1)[1].type_as(labels)
     correct = preds.eq(labels).double()
     correct = correct.sum()
     return correct / len(labels)
-
-
-def sparse_mx_to_torch_sparse_tensor(sparse_mx):
-    """Convert a scipy sparse matrix to a torch sparse tensor."""
-    sparse_mx = sparse_mx.tocoo().astype(np.float32)
-    indices = torch.from_numpy(
-        np.vstack((sparse_mx.row, sparse_mx.col)).astype(np.int64))
-    values = torch.from_numpy(sparse_mx.data)
-    shape = torch.Size(sparse_mx.shape)
-    return torch.sparse.FloatTensor(indices, values, shape)
+    
+if __name__ == '__main__':
+    output = torch.tensor([[0.1,0.3,0.5],[0.7,0.2,0.4],[0,1,0]])
+    labels = torch.tensor([2,1,1])
+    print(accuracy(output,labels))
