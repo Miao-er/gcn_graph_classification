@@ -16,7 +16,7 @@ from models import GCN
 parser = argparse.ArgumentParser()
 parser.add_argument('--no-cuda', action='store_true', default=False, #默认不使用cuda
                     help='Disables CUDA training.')
-parser.add_argument('--seed', type=int, default=42, help='Random seed.') #随机种子
+parser.add_argument('--seed', type=int, default=41, help='Random seed.') #随机种子
 parser.add_argument('--weight_decay', type=float, default=5e-4, #权重衰减
                     help='Weight decay (L2 loss on parameters).')
 parser.add_argument('--hidden', type=int, default=64,#隐藏层单元（维度）
@@ -26,13 +26,13 @@ parser.add_argument('--dropout', type=float, default=0.5,
 
 parser.add_argument('--epochs', type=int, default=60,  #训练epoch
                     help='Number of epochs to train.')
-parser.add_argument('--lr', type=float, default= 0.02, #学习率
+parser.add_argument('--lr', type=float, default= 0.05, #学习率
                     help='Initial learning rate.')
 parser.add_argument('--batch_size', type=int, default=64, 
                     help='batch size.')
 parser.add_argument('--knn_param', type=int, default=50, 
                     help='top-k nearest neighbors.')
-parser.add_argument('--lr_step', type=int, default=20, 
+parser.add_argument('--lr_step', type=int, default=10, 
                     help='update learning rate every n steps')
                     
 parser.add_argument('--test_mode', action='store_true', default=False, 
@@ -41,7 +41,7 @@ parser.add_argument('--trained', action='store_true', default=False,
                     help='trained using saved model.')
 parser.add_argument('--last_epoch', type = int, default= -1, 
                     help='trained using saved model.')
-parser.add_argument('--logger', type = str, default='../train.log', 
+parser.add_argument('--logger', type = str, default='../log/train.log', 
                     help='log the training process.')
 parser.add_argument('--save_model', type = str, default='../train_model/model.pt', 
                     help='save trained model path.')
@@ -69,7 +69,7 @@ model = GCN(nfeat=3,
             dropout=args.dropout)
 optimizer = optim.Adam(model.parameters(),
                        lr=args.lr, weight_decay=args.weight_decay)
-scheduler = optim.lr_scheduler.StepLR(optimizer,args.lr_step, gamma = 0.2)
+scheduler = optim.lr_scheduler.StepLR(optimizer,args.lr_step, gamma = 0.5)
 scheduler.last_epoch = args.last_epoch
 
 #load logger
@@ -134,8 +134,8 @@ def test():
         all_acc.append(acc_test)
         all_loss.append(loss_test)
 
-    print("Test set results:",
-          "loss= {:.4f}".format(torch.tensor(all_loss).mean().item()),
+    logger.info("Test set results: "+
+          "loss= {:.4f} ".format(torch.tensor(all_loss).mean().item()) + 
           "accuracy= {:.4f}".format(torch.tensor(all_acc).mean().item()))
 
 
@@ -156,5 +156,6 @@ if not args.test_mode:
 # Testing
 else:
     model.load_state_dict(torch.load(args.best_model))
+    logger.info(f'test model saved at :{args.best_model}')
     with torch.no_grad():
         test()

@@ -79,9 +79,9 @@ class ModelNet40(Dataset):
     def __getitem__(self, item):
         pointcloud = self.data[item][:self.num_points]
         label = self.label[item]
-        if self.partition == 'train':
-            pointcloud = translate_pointcloud(pointcloud)
-            np.random.shuffle(pointcloud)
+        # if self.partition == 'train':
+        #     pointcloud = translate_pointcloud(pointcloud)
+        #     np.random.shuffle(pointcloud)
         return pointcloud, label
 
     def __len__(self):
