@@ -10,7 +10,25 @@ import numpy as np
 from torch.utils.data import Dataset
 from torch.utils.data import DataLoader
 from yaml import load
-
+import logging
+ 
+def get_logger(filename, verbosity=1, name=None):
+    level_dict = {0: logging.DEBUG, 1: logging.INFO, 2: logging.WARNING}
+    formatter = logging.Formatter(
+        "[%(asctime)s]%(message)s"
+    )
+    logger = logging.getLogger(name)
+    logger.setLevel(level_dict[verbosity])
+ 
+    fh = logging.FileHandler(filename, "a")
+    fh.setFormatter(formatter)
+    logger.addHandler(fh)
+ 
+    sh = logging.StreamHandler()
+    sh.setFormatter(formatter)
+    logger.addHandler(sh)
+ 
+    return logger
 
 def download():
     PATH = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -23,7 +41,6 @@ def download():
         os.system('mv %s %s' % (zipfile[:-4], DATA_DIR))
         os.system('rm %s' % (zipfile))
     return DATA_DIR
-
 
 def load_raw_data(partition):
     '''
@@ -45,14 +62,12 @@ def load_raw_data(partition):
     all_label = np.concatenate(all_label, axis=0)
     return all_data, all_label 
 
-
 def translate_pointcloud(pointcloud):
     xyz1 = np.random.uniform(low=2./3., high=3./2., size=[3])
     xyz2 = np.random.uniform(low=-0.2, high=0.2, size=[3])
        
     translated_pointcloud = np.add(np.multiply(pointcloud, xyz1), xyz2).astype('float32')
     return translated_pointcloud
-
 
 class ModelNet40(Dataset):
     def __init__(self, num_points, partition='train'):
@@ -72,18 +87,17 @@ class ModelNet40(Dataset):
     def __len__(self):
         return self.data.shape[0]
 
-
-
-def load_data(batch_size):
+def load_data(batch_size,tag):
     '''
     点云数据记载
     '''
-    train = ModelNet40(2048,'train')
-    test = ModelNet40(2048, 'test') 
-    train_loader = DataLoader(dataset=train,batch_size = batch_size,shuffle = True)
-    test_loader = DataLoader(dataset=test,batch_size = batch_size)
+    data = ModelNet40(2048,tag)
+    if tag == 'train':
+        loader = DataLoader(dataset=data,batch_size = batch_size,shuffle = True)
+    else:
+        loader = DataLoader(dataset=data,batch_size = batch_size)
 
-    return train_loader,test_loader
+    return loader
 
 def knn(x, k):
     device = torch.device('cuda')
@@ -92,7 +106,7 @@ def knn(x, k):
     pairwise_distance = -xx - inner - xx.transpose(2, 1) # (a-b)^2 = a^2 + b^2 -2ab
  
     val,idx = pairwise_distance.topk(k=k, dim=-1)   # (batch_size, num_points, k)
-    weight = torch.exp(pairwise_distance).to(device)
+    weight = torch.exp(pairwise_distance)
     batch_size,num_points,feat_dim = x.shape
     idx = idx.reshape(batch_size * num_points,-1)
     idx_base = torch.arange(0,batch_size * num_points).view(-1,1)*num_points
@@ -106,7 +120,6 @@ def knn(x, k):
 
 def build_graph(batch_data,k):
     '''
-
     返回邻接矩阵
     data:batch_size * 2048 * features
     '''
