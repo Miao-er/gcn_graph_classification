@@ -26,7 +26,7 @@ parser.add_argument('--dropout', type=float, default=0.5,
 
 parser.add_argument('--epochs', type=int, default=60,  #训练epoch
                     help='Number of epochs to train.')
-parser.add_argument('--lr', type=float, default= 0.05, #学习率
+parser.add_argument('--lr', type=float, default= 0.1, #学习率
                     help='Initial learning rate.')
 parser.add_argument('--batch_size', type=int, default=64, 
                     help='batch size.')
@@ -58,9 +58,8 @@ if args.cuda:
     torch.cuda.manual_seed(args.seed)
 
 # Load data
-if args.test_mode:
-    test_loader = load_data(batch_size = args.batch_size,tag = 'test')
-else:
+test_loader = load_data(batch_size = args.batch_size,tag = 'test')
+if not args.test_mode:
     train_loader = load_data(batch_size = args.batch_size,tag = 'train')
 # Model and optimizer
 model = GCN(nfeat=3,
@@ -115,6 +114,7 @@ def train(epoch,best_accuracy = 0):
     logger.info("this epoch:\n" + 
     "loss= {:.4f} ".format(torch.tensor(all_loss).mean().item()) +
     "accuracy= {:.4f}".format(mean_acc))
+    
     return  best_accuracy
 
 
@@ -147,12 +147,19 @@ if not args.test_mode:
     best_accuracy = 0
     if args.trained:
         model.load_state_dict(torch.load(args.save_model))
+
+#恢复断点学习率
+    for param_group in optimizer.param_groups:
+        param_group['lr'] = scheduler.get_lr()[0]
+
     for epoch in range(args.epochs):
         best_accuracy = train(epoch,best_accuracy)
         torch.save(model.state_dict(), args.save_model)
     logger.info("Optimization Finished!")
     logger.info("Total time elapsed: {:.4f}s".format(time.time() - t_total))
     logger.info('the best accuarcy is {:.4f}'.format(best_accuracy))
+    with torch.no_grad():
+        test()
 # Testing
 else:
     model.load_state_dict(torch.load(args.best_model))

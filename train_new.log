@@ -1,0 +1,605 @@
+[2022-06-25 06:42:32,238]trained model saved at :../train_model/model_new.pt
+[2022-06-25 06:42:32,238]best model saved at :../best_model/model_new.pt
+[2022-06-25 06:42:32,238]Epoch: 0001
+[2022-06-25 06:42:39,290]iter:0020 loss_train: 3.4244 acc_train: 0.0781 time: 0.2054s
+[2022-06-25 06:42:46,678]iter:0040 loss_train: 3.5068 acc_train: 0.0625 time: 0.2204s
+[2022-06-25 06:42:53,965]iter:0060 loss_train: 2.9624 acc_train: 0.1250 time: 0.2205s
+[2022-06-25 06:43:01,280]iter:0080 loss_train: 3.0527 acc_train: 0.1094 time: 0.2201s
+[2022-06-25 06:43:08,465]iter:0100 loss_train: 2.9040 acc_train: 0.2031 time: 0.2209s
+[2022-06-25 06:43:15,784]iter:0120 loss_train: 3.0004 acc_train: 0.1094 time: 0.2121s
+[2022-06-25 06:43:23,051]iter:0140 loss_train: 2.9947 acc_train: 0.2344 time: 0.2207s
+[2022-06-25 06:43:28,449]this epoch:
+loss= 3.1695 accuracy= 0.1315
+[2022-06-25 06:43:28,454]Epoch: 0002
+[2022-06-25 06:43:35,393]iter:0020 loss_train: 2.8683 acc_train: 0.2500 time: 0.2216s
+[2022-06-25 06:43:42,721]iter:0040 loss_train: 2.6501 acc_train: 0.2812 time: 0.2214s
+[2022-06-25 06:43:50,038]iter:0060 loss_train: 2.8660 acc_train: 0.2031 time: 0.2212s
+[2022-06-25 06:43:57,127]iter:0080 loss_train: 2.7850 acc_train: 0.2969 time: 0.2075s
+[2022-06-25 06:44:03,995]iter:0100 loss_train: 2.9888 acc_train: 0.1406 time: 0.2067s
+[2022-06-25 06:44:10,903]iter:0120 loss_train: 2.7625 acc_train: 0.2344 time: 0.2219s
+[2022-06-25 06:44:18,175]iter:0140 loss_train: 2.8278 acc_train: 0.2031 time: 0.2093s
+[2022-06-25 06:44:23,541]this epoch:
+loss= 2.7939 accuracy= 0.2231
+[2022-06-25 06:44:23,546]Epoch: 0003
+[2022-06-25 06:44:30,480]iter:0020 loss_train: 2.4430 acc_train: 0.3125 time: 0.2113s
+[2022-06-25 06:44:37,755]iter:0040 loss_train: 2.4971 acc_train: 0.2500 time: 0.2092s
+[2022-06-25 06:44:45,096]iter:0060 loss_train: 2.2326 acc_train: 0.3594 time: 0.2224s
+[2022-06-25 06:44:52,463]iter:0080 loss_train: 2.3232 acc_train: 0.2812 time: 0.2220s
+[2022-06-25 06:44:59,787]iter:0100 loss_train: 2.1521 acc_train: 0.4375 time: 0.2230s
+[2022-06-25 06:45:07,131]iter:0120 loss_train: 1.9903 acc_train: 0.4062 time: 0.2226s
+[2022-06-25 06:45:14,212]iter:0140 loss_train: 2.2530 acc_train: 0.4062 time: 0.2220s
+[2022-06-25 06:45:19,694]this epoch:
+loss= 2.3290 accuracy= 0.3477
+[2022-06-25 06:45:19,700]Epoch: 0004
+[2022-06-25 06:45:26,756]iter:0020 loss_train: 1.7128 acc_train: 0.5156 time: 0.2120s
+[2022-06-25 06:45:34,182]iter:0040 loss_train: 1.9962 acc_train: 0.4375 time: 0.2224s
+[2022-06-25 06:45:41,523]iter:0060 loss_train: 2.2216 acc_train: 0.3438 time: 0.2226s
+[2022-06-25 06:45:48,861]iter:0080 loss_train: 2.0929 acc_train: 0.3906 time: 0.2226s
+[2022-06-25 06:45:56,205]iter:0100 loss_train: 2.1202 acc_train: 0.4688 time: 0.2218s
+[2022-06-25 06:46:03,579]iter:0120 loss_train: 2.0577 acc_train: 0.3906 time: 0.2223s
+[2022-06-25 06:46:10,949]iter:0140 loss_train: 1.9745 acc_train: 0.4062 time: 0.2228s
+[2022-06-25 06:46:16,259]this epoch:
+loss= 2.0280 accuracy= 0.4280
+[2022-06-25 06:46:16,263]Epoch: 0005
+[2022-06-25 06:46:23,386]iter:0020 loss_train: 1.5337 acc_train: 0.5781 time: 0.2227s
+[2022-06-25 06:46:30,700]iter:0040 loss_train: 1.8525 acc_train: 0.4062 time: 0.2101s
+[2022-06-25 06:46:38,068]iter:0060 loss_train: 1.6138 acc_train: 0.5469 time: 0.2234s
+[2022-06-25 06:46:45,466]iter:0080 loss_train: 1.6515 acc_train: 0.5312 time: 0.2261s
+[2022-06-25 06:46:52,889]iter:0100 loss_train: 1.7536 acc_train: 0.5312 time: 0.2092s
+[2022-06-25 06:47:00,160]iter:0120 loss_train: 1.7573 acc_train: 0.5312 time: 0.2222s
+[2022-06-25 06:47:07,512]iter:0140 loss_train: 1.7210 acc_train: 0.5000 time: 0.2086s
+[2022-06-25 06:47:12,997]this epoch:
+loss= 1.8310 accuracy= 0.4797
+[2022-06-25 06:47:13,004]Epoch: 0006
+[2022-06-25 06:47:20,009]iter:0020 loss_train: 1.6581 acc_train: 0.5625 time: 0.2225s
+[2022-06-25 06:47:27,338]iter:0040 loss_train: 1.6046 acc_train: 0.5469 time: 0.2232s
+[2022-06-25 06:47:34,657]iter:0060 loss_train: 1.7912 acc_train: 0.4688 time: 0.2220s
+[2022-06-25 06:47:42,005]iter:0080 loss_train: 1.7088 acc_train: 0.4688 time: 0.2229s
+[2022-06-25 06:47:49,328]iter:0100 loss_train: 1.3216 acc_train: 0.6719 time: 0.2225s
+[2022-06-25 06:47:56,690]iter:0120 loss_train: 1.5570 acc_train: 0.5312 time: 0.2225s
+[2022-06-25 06:48:04,158]iter:0140 loss_train: 1.8010 acc_train: 0.5312 time: 0.2229s
+[2022-06-25 06:48:09,730]this epoch:
+loss= 1.6822 accuracy= 0.5151
+[2022-06-25 06:48:09,736]Epoch: 0007
+[2022-06-25 06:48:17,317]iter:0020 loss_train: 1.5676 acc_train: 0.5469 time: 0.2085s
+[2022-06-25 06:48:25,224]iter:0040 loss_train: 1.8505 acc_train: 0.5156 time: 0.2107s
+[2022-06-25 06:48:33,157]iter:0060 loss_train: 1.4022 acc_train: 0.5469 time: 0.2226s
+[2022-06-25 06:48:41,030]iter:0080 loss_train: 1.7506 acc_train: 0.6250 time: 0.2248s
+[2022-06-25 06:48:49,175]iter:0100 loss_train: 1.2613 acc_train: 0.6250 time: 0.2153s
+[2022-06-25 06:48:57,243]iter:0120 loss_train: 1.5645 acc_train: 0.5312 time: 0.2231s
+[2022-06-25 06:49:05,751]iter:0140 loss_train: 1.6727 acc_train: 0.5156 time: 0.2233s
+[2022-06-25 06:49:11,945]this epoch:
+loss= 1.5827 accuracy= 0.5457
+[2022-06-25 06:49:11,953]Epoch: 0008
+[2022-06-25 06:49:19,651]iter:0020 loss_train: 1.4184 acc_train: 0.6094 time: 0.2227s
+[2022-06-25 06:49:27,660]iter:0040 loss_train: 1.5874 acc_train: 0.5156 time: 0.2243s
+[2022-06-25 06:49:36,099]iter:0060 loss_train: 1.4696 acc_train: 0.5625 time: 0.2214s
+[2022-06-25 06:49:44,441]iter:0080 loss_train: 1.8332 acc_train: 0.4688 time: 0.2195s
+[2022-06-25 06:49:52,502]iter:0100 loss_train: 1.6028 acc_train: 0.5000 time: 0.2126s
+[2022-06-25 06:50:00,505]iter:0120 loss_train: 1.3041 acc_train: 0.6406 time: 0.2245s
+[2022-06-25 06:50:08,838]iter:0140 loss_train: 1.4069 acc_train: 0.7031 time: 0.2294s
+[2022-06-25 06:50:14,908]this epoch:
+loss= 1.4913 accuracy= 0.5724
+[2022-06-25 06:50:14,913]Epoch: 0009
+[2022-06-25 06:50:22,310]iter:0020 loss_train: 1.2073 acc_train: 0.7031 time: 0.2229s
+[2022-06-25 06:50:30,371]iter:0040 loss_train: 1.2951 acc_train: 0.6250 time: 0.2098s
+[2022-06-25 06:50:38,586]iter:0060 loss_train: 1.2577 acc_train: 0.6562 time: 0.2252s
+[2022-06-25 06:50:46,552]iter:0080 loss_train: 1.0018 acc_train: 0.7500 time: 0.2248s
+[2022-06-25 06:50:54,733]iter:0100 loss_train: 1.3716 acc_train: 0.5156 time: 0.2229s
+[2022-06-25 06:51:02,708]iter:0120 loss_train: 1.4131 acc_train: 0.5469 time: 0.2318s
+[2022-06-25 06:51:10,876]iter:0140 loss_train: 1.6347 acc_train: 0.5312 time: 0.2272s
+[2022-06-25 06:51:16,684]this epoch:
+loss= 1.3846 accuracy= 0.5985
+[2022-06-25 06:51:16,691]Epoch: 0010
+[2022-06-25 06:51:24,131]iter:0020 loss_train: 1.5992 acc_train: 0.5312 time: 0.2233s
+[2022-06-25 06:51:31,940]iter:0040 loss_train: 1.4809 acc_train: 0.6250 time: 0.2230s
+[2022-06-25 06:51:39,726]iter:0060 loss_train: 1.4060 acc_train: 0.5469 time: 0.2197s
+[2022-06-25 06:51:48,027]iter:0080 loss_train: 1.1202 acc_train: 0.6562 time: 0.2088s
+[2022-06-25 06:51:56,344]iter:0100 loss_train: 1.4432 acc_train: 0.5469 time: 0.2223s
+[2022-06-25 06:52:04,248]iter:0120 loss_train: 1.4336 acc_train: 0.6562 time: 0.2227s
+[2022-06-25 06:52:12,416]iter:0140 loss_train: 1.0030 acc_train: 0.6875 time: 0.2229s
+[2022-06-25 06:52:18,138]this epoch:
+loss= 1.3346 accuracy= 0.6094
+[2022-06-25 06:52:18,150]Epoch: 0011
+[2022-06-25 06:52:25,563]iter:0020 loss_train: 1.5718 acc_train: 0.5781 time: 0.2645s
+[2022-06-25 06:52:33,512]iter:0040 loss_train: 1.5510 acc_train: 0.5625 time: 0.2234s
+[2022-06-25 06:52:41,815]iter:0060 loss_train: 1.3233 acc_train: 0.6094 time: 0.2239s
+[2022-06-25 06:52:50,039]iter:0080 loss_train: 1.2723 acc_train: 0.6875 time: 0.2090s
+[2022-06-25 06:52:58,326]iter:0100 loss_train: 1.3113 acc_train: 0.6562 time: 0.2235s
+[2022-06-25 06:53:06,270]iter:0120 loss_train: 1.3857 acc_train: 0.6562 time: 0.2095s
+[2022-06-25 06:53:14,623]iter:0140 loss_train: 1.3031 acc_train: 0.5938 time: 0.2196s
+[2022-06-25 06:53:20,493]this epoch:
+loss= 1.2913 accuracy= 0.6176
+[2022-06-25 06:53:20,500]Epoch: 0012
+[2022-06-25 06:53:28,314]iter:0020 loss_train: 1.3999 acc_train: 0.5938 time: 0.2235s
+[2022-06-25 06:53:36,683]iter:0040 loss_train: 1.5777 acc_train: 0.6094 time: 0.2109s
+[2022-06-25 06:53:44,571]iter:0060 loss_train: 0.9443 acc_train: 0.7188 time: 0.2386s
+[2022-06-25 06:53:52,579]iter:0080 loss_train: 1.3287 acc_train: 0.6406 time: 0.2235s
+[2022-06-25 06:54:00,752]iter:0100 loss_train: 1.1555 acc_train: 0.6719 time: 0.2100s
+[2022-06-25 06:54:08,994]iter:0120 loss_train: 1.4330 acc_train: 0.6094 time: 0.2306s
+[2022-06-25 06:54:17,070]iter:0140 loss_train: 1.3820 acc_train: 0.5000 time: 0.2230s
+[2022-06-25 06:54:23,194]this epoch:
+loss= 1.2663 accuracy= 0.6228
+[2022-06-25 06:54:23,203]Epoch: 0013
+[2022-06-25 06:54:30,770]iter:0020 loss_train: 1.4064 acc_train: 0.6094 time: 0.2230s
+[2022-06-25 06:54:38,954]iter:0040 loss_train: 1.2338 acc_train: 0.6406 time: 0.2230s
+[2022-06-25 06:54:46,740]iter:0060 loss_train: 1.6439 acc_train: 0.5312 time: 0.2112s
+[2022-06-25 06:54:54,720]iter:0080 loss_train: 1.3611 acc_train: 0.6562 time: 0.2257s
+[2022-06-25 06:55:02,733]iter:0100 loss_train: 1.2084 acc_train: 0.6406 time: 0.2111s
+[2022-06-25 06:55:10,563]iter:0120 loss_train: 1.6446 acc_train: 0.4844 time: 0.2286s
+[2022-06-25 06:55:18,712]iter:0140 loss_train: 1.4886 acc_train: 0.6094 time: 0.2240s
+[2022-06-25 06:55:24,974]this epoch:
+loss= 1.2408 accuracy= 0.6298
+[2022-06-25 06:55:24,983]Epoch: 0014
+[2022-06-25 06:55:32,360]iter:0020 loss_train: 0.9588 acc_train: 0.7031 time: 0.2236s
+[2022-06-25 06:55:40,524]iter:0040 loss_train: 1.0915 acc_train: 0.6406 time: 0.2310s
+[2022-06-25 06:55:48,431]iter:0060 loss_train: 1.4825 acc_train: 0.5625 time: 0.2227s
+[2022-06-25 06:55:56,971]iter:0080 loss_train: 1.1012 acc_train: 0.6875 time: 0.2236s
+[2022-06-25 06:56:04,887]iter:0100 loss_train: 1.2887 acc_train: 0.6094 time: 0.2105s
+[2022-06-25 06:56:13,513]iter:0120 loss_train: 1.5532 acc_train: 0.5938 time: 0.2231s
+[2022-06-25 06:56:21,394]iter:0140 loss_train: 1.2926 acc_train: 0.5625 time: 0.2233s
+[2022-06-25 06:56:27,254]this epoch:
+loss= 1.2272 accuracy= 0.6332
+[2022-06-25 06:56:27,263]Epoch: 0015
+[2022-06-25 06:56:34,714]iter:0020 loss_train: 1.5349 acc_train: 0.6250 time: 0.2388s
+[2022-06-25 06:56:42,692]iter:0040 loss_train: 1.0628 acc_train: 0.7500 time: 0.2275s
+[2022-06-25 06:56:51,062]iter:0060 loss_train: 1.2465 acc_train: 0.5938 time: 0.2240s
+[2022-06-25 06:56:59,167]iter:0080 loss_train: 1.1594 acc_train: 0.6562 time: 0.2301s
+[2022-06-25 06:57:07,267]iter:0100 loss_train: 1.3231 acc_train: 0.5781 time: 0.2243s
+[2022-06-25 06:57:15,543]iter:0120 loss_train: 1.1387 acc_train: 0.6562 time: 0.2254s
+[2022-06-25 06:57:23,700]iter:0140 loss_train: 0.9943 acc_train: 0.6875 time: 0.2509s
+[2022-06-25 06:57:29,858]this epoch:
+loss= 1.2222 accuracy= 0.6368
+[2022-06-25 06:57:29,867]Epoch: 0016
+[2022-06-25 06:57:37,725]iter:0020 loss_train: 1.2722 acc_train: 0.6406 time: 0.2167s
+[2022-06-25 06:57:45,800]iter:0040 loss_train: 1.2554 acc_train: 0.6562 time: 0.2231s
+[2022-06-25 06:57:54,041]iter:0060 loss_train: 1.1127 acc_train: 0.7031 time: 0.2091s
+[2022-06-25 06:58:02,085]iter:0080 loss_train: 1.3549 acc_train: 0.5312 time: 0.2089s
+[2022-06-25 06:58:10,185]iter:0100 loss_train: 1.1526 acc_train: 0.6875 time: 0.2230s
+[2022-06-25 06:58:18,753]iter:0120 loss_train: 1.2822 acc_train: 0.6250 time: 0.2231s
+[2022-06-25 06:58:26,589]iter:0140 loss_train: 1.2585 acc_train: 0.6719 time: 0.2236s
+[2022-06-25 06:58:32,681]this epoch:
+loss= 1.1887 accuracy= 0.6449
+[2022-06-25 06:58:32,691]Epoch: 0017
+[2022-06-25 06:58:40,041]iter:0020 loss_train: 1.2365 acc_train: 0.6719 time: 0.2232s
+[2022-06-25 06:58:47,998]iter:0040 loss_train: 0.9450 acc_train: 0.7344 time: 0.2229s
+[2022-06-25 06:58:56,147]iter:0060 loss_train: 1.4231 acc_train: 0.5781 time: 0.2232s
+[2022-06-25 06:59:04,374]iter:0080 loss_train: 1.1304 acc_train: 0.6562 time: 0.2095s
+[2022-06-25 06:59:12,737]iter:0100 loss_train: 1.4139 acc_train: 0.6406 time: 0.2242s
+[2022-06-25 06:59:21,328]iter:0120 loss_train: 1.3783 acc_train: 0.6406 time: 0.2525s
+[2022-06-25 06:59:30,955]iter:0140 loss_train: 1.0709 acc_train: 0.6250 time: 0.2214s
+[2022-06-25 06:59:37,772]this epoch:
+loss= 1.1737 accuracy= 0.6510
+[2022-06-25 06:59:37,805]Epoch: 0018
+[2022-06-25 06:59:46,149]iter:0020 loss_train: 1.0472 acc_train: 0.7031 time: 0.2093s
+[2022-06-25 06:59:55,526]iter:0040 loss_train: 1.0800 acc_train: 0.6406 time: 0.2239s
+[2022-06-25 07:00:05,158]iter:0060 loss_train: 1.4815 acc_train: 0.5625 time: 0.2227s
+[2022-06-25 07:00:14,357]iter:0080 loss_train: 0.8962 acc_train: 0.7344 time: 0.2155s
+[2022-06-25 07:00:24,039]iter:0100 loss_train: 1.2113 acc_train: 0.7031 time: 0.2443s
+[2022-06-25 07:00:33,392]iter:0120 loss_train: 0.9865 acc_train: 0.7500 time: 0.2217s
+[2022-06-25 07:00:42,556]iter:0140 loss_train: 1.1718 acc_train: 0.6250 time: 0.2470s
+[2022-06-25 07:00:49,095]this epoch:
+loss= 1.1585 accuracy= 0.6556
+[2022-06-25 07:00:49,103]Epoch: 0019
+[2022-06-25 07:00:57,786]iter:0020 loss_train: 1.1278 acc_train: 0.6562 time: 0.2275s
+[2022-06-25 07:01:06,323]iter:0040 loss_train: 1.0170 acc_train: 0.7031 time: 0.2327s
+[2022-06-25 07:01:15,314]iter:0060 loss_train: 1.2079 acc_train: 0.6562 time: 0.2645s
+[2022-06-25 07:01:24,459]iter:0080 loss_train: 0.9286 acc_train: 0.7812 time: 0.2223s
+[2022-06-25 07:01:33,817]iter:0100 loss_train: 1.0773 acc_train: 0.6406 time: 0.2232s
+[2022-06-25 07:01:43,583]iter:0120 loss_train: 1.0973 acc_train: 0.6562 time: 0.2243s
+[2022-06-25 07:01:53,060]iter:0140 loss_train: 1.3537 acc_train: 0.6094 time: 0.2374s
+[2022-06-25 07:01:59,643]this epoch:
+loss= 1.1489 accuracy= 0.6556
+[2022-06-25 07:01:59,654]Epoch: 0020
+[2022-06-25 07:02:07,886]iter:0020 loss_train: 1.2243 acc_train: 0.6406 time: 0.2249s
+[2022-06-25 07:02:16,955]iter:0040 loss_train: 1.1878 acc_train: 0.6406 time: 0.2313s
+[2022-06-25 07:02:25,520]iter:0060 loss_train: 0.9901 acc_train: 0.7188 time: 0.2676s
+[2022-06-25 07:02:34,367]iter:0080 loss_train: 1.4077 acc_train: 0.6406 time: 0.2357s
+[2022-06-25 07:02:43,771]iter:0100 loss_train: 1.1372 acc_train: 0.6875 time: 0.2229s
+[2022-06-25 07:02:53,736]iter:0120 loss_train: 1.0509 acc_train: 0.6719 time: 0.2432s
+[2022-06-25 07:03:03,598]iter:0140 loss_train: 1.1127 acc_train: 0.6406 time: 0.2231s
+[2022-06-25 07:03:10,763]this epoch:
+loss= 1.1423 accuracy= 0.6610
+[2022-06-25 07:03:10,771]Epoch: 0021
+[2022-06-25 07:03:19,000]iter:0020 loss_train: 1.1681 acc_train: 0.6719 time: 0.2193s
+[2022-06-25 07:03:28,279]iter:0040 loss_train: 1.2795 acc_train: 0.6562 time: 0.2332s
+[2022-06-25 07:03:38,075]iter:0060 loss_train: 1.2445 acc_train: 0.5781 time: 0.2385s
+[2022-06-25 07:03:47,356]iter:0080 loss_train: 1.2457 acc_train: 0.6250 time: 0.2246s
+[2022-06-25 07:03:56,879]iter:0100 loss_train: 1.2826 acc_train: 0.6406 time: 0.2221s
+[2022-06-25 07:04:06,819]iter:0120 loss_train: 1.3715 acc_train: 0.6094 time: 0.2372s
+[2022-06-25 07:04:15,415]iter:0140 loss_train: 1.1490 acc_train: 0.5938 time: 0.2248s
+[2022-06-25 07:04:22,133]this epoch:
+loss= 1.1042 accuracy= 0.6646
+[2022-06-25 07:04:22,142]Epoch: 0022
+[2022-06-25 07:04:31,386]iter:0020 loss_train: 1.0111 acc_train: 0.7031 time: 0.2226s
+[2022-06-25 07:04:40,888]iter:0040 loss_train: 0.8855 acc_train: 0.7031 time: 0.2239s
+[2022-06-25 07:04:50,649]iter:0060 loss_train: 0.9094 acc_train: 0.6875 time: 0.2227s
+[2022-06-25 07:04:59,119]iter:0080 loss_train: 0.9020 acc_train: 0.7344 time: 0.2225s
+[2022-06-25 07:05:07,194]iter:0100 loss_train: 0.6928 acc_train: 0.8281 time: 0.2229s
+[2022-06-25 07:05:15,820]iter:0120 loss_train: 0.7560 acc_train: 0.7969 time: 0.2230s
+[2022-06-25 07:05:24,582]iter:0140 loss_train: 1.2608 acc_train: 0.6562 time: 0.2254s
+[2022-06-25 07:05:31,248]this epoch:
+loss= 0.9428 accuracy= 0.7144
+[2022-06-25 07:05:31,257]Epoch: 0023
+[2022-06-25 07:05:39,679]iter:0020 loss_train: 0.8250 acc_train: 0.7344 time: 0.2636s
+[2022-06-25 07:05:48,569]iter:0040 loss_train: 0.7945 acc_train: 0.7500 time: 0.2237s
+[2022-06-25 07:05:57,991]iter:0060 loss_train: 1.0985 acc_train: 0.6875 time: 0.2341s
+[2022-06-25 07:06:06,957]iter:0080 loss_train: 0.8005 acc_train: 0.7031 time: 0.2330s
+[2022-06-25 07:06:15,665]iter:0100 loss_train: 0.8065 acc_train: 0.7188 time: 0.2235s
+[2022-06-25 07:06:24,947]iter:0120 loss_train: 0.7415 acc_train: 0.7188 time: 0.2361s
+[2022-06-25 07:06:34,145]iter:0140 loss_train: 0.9000 acc_train: 0.7500 time: 0.2698s
+[2022-06-25 07:06:40,768]this epoch:
+loss= 0.9207 accuracy= 0.7191
+[2022-06-25 07:06:40,777]Epoch: 0024
+[2022-06-25 07:06:50,184]iter:0020 loss_train: 0.8746 acc_train: 0.7188 time: 0.2336s
+[2022-06-25 07:06:59,385]iter:0040 loss_train: 0.8820 acc_train: 0.7500 time: 0.2581s
+[2022-06-25 07:07:09,213]iter:0060 loss_train: 0.9019 acc_train: 0.7656 time: 0.2371s
+[2022-06-25 07:07:18,701]iter:0080 loss_train: 0.9200 acc_train: 0.6719 time: 0.2211s
+[2022-06-25 07:07:27,416]iter:0100 loss_train: 0.9986 acc_train: 0.6719 time: 0.2352s
+[2022-06-25 07:07:36,833]iter:0120 loss_train: 0.9341 acc_train: 0.6875 time: 0.2224s
+[2022-06-25 07:07:45,864]iter:0140 loss_train: 1.0064 acc_train: 0.6719 time: 0.2217s
+[2022-06-25 07:07:52,935]this epoch:
+loss= 0.9045 accuracy= 0.7230
+[2022-06-25 07:07:52,986]Epoch: 0025
+[2022-06-25 07:08:02,248]iter:0020 loss_train: 0.7893 acc_train: 0.8281 time: 0.2250s
+[2022-06-25 07:08:11,384]iter:0040 loss_train: 0.8928 acc_train: 0.6719 time: 0.2227s
+[2022-06-25 07:08:20,355]iter:0060 loss_train: 1.0079 acc_train: 0.6719 time: 0.2234s
+[2022-06-25 07:08:29,998]iter:0080 loss_train: 1.0347 acc_train: 0.6719 time: 0.2499s
+[2022-06-25 07:08:38,170]iter:0100 loss_train: 0.8142 acc_train: 0.7344 time: 0.2280s
+[2022-06-25 07:08:47,916]iter:0120 loss_train: 0.8738 acc_train: 0.7188 time: 0.2506s
+[2022-06-25 07:08:57,014]iter:0140 loss_train: 0.7517 acc_train: 0.7500 time: 0.3130s
+[2022-06-25 07:09:03,838]this epoch:
+loss= 0.9097 accuracy= 0.7189
+[2022-06-25 07:09:03,847]Epoch: 0026
+[2022-06-25 07:09:11,714]iter:0020 loss_train: 0.8621 acc_train: 0.7188 time: 0.2253s
+[2022-06-25 07:09:21,050]iter:0040 loss_train: 0.9333 acc_train: 0.6875 time: 0.2560s
+[2022-06-25 07:09:30,750]iter:0060 loss_train: 1.1757 acc_train: 0.7031 time: 0.2313s
+[2022-06-25 07:09:39,595]iter:0080 loss_train: 0.8390 acc_train: 0.7500 time: 0.2235s
+[2022-06-25 07:09:48,420]iter:0100 loss_train: 1.0852 acc_train: 0.7188 time: 0.2266s
+[2022-06-25 07:09:56,600]iter:0120 loss_train: 0.9106 acc_train: 0.7500 time: 0.2269s
+[2022-06-25 07:10:05,833]iter:0140 loss_train: 1.0534 acc_train: 0.6250 time: 0.2228s
+[2022-06-25 07:10:12,952]this epoch:
+loss= 0.8808 accuracy= 0.7299
+[2022-06-25 07:10:12,961]Epoch: 0027
+[2022-06-25 07:10:21,558]iter:0020 loss_train: 0.9525 acc_train: 0.7188 time: 0.2381s
+[2022-06-25 07:10:30,722]iter:0040 loss_train: 0.8420 acc_train: 0.7656 time: 0.2487s
+[2022-06-25 07:10:39,382]iter:0060 loss_train: 0.9043 acc_train: 0.7188 time: 0.2234s
+[2022-06-25 07:10:48,144]iter:0080 loss_train: 1.1759 acc_train: 0.6875 time: 0.2240s
+[2022-06-25 07:10:57,248]iter:0100 loss_train: 0.8799 acc_train: 0.7656 time: 0.2286s
+[2022-06-25 07:11:06,297]iter:0120 loss_train: 0.8833 acc_train: 0.7812 time: 0.2405s
+[2022-06-25 07:11:15,399]iter:0140 loss_train: 0.8923 acc_train: 0.7656 time: 0.2232s
+[2022-06-25 07:11:21,761]this epoch:
+loss= 0.8983 accuracy= 0.7237
+[2022-06-25 07:11:21,787]Epoch: 0028
+[2022-06-25 07:11:30,522]iter:0020 loss_train: 0.5801 acc_train: 0.7969 time: 0.2220s
+[2022-06-25 07:11:39,376]iter:0040 loss_train: 1.1045 acc_train: 0.6562 time: 0.2434s
+[2022-06-25 07:11:48,243]iter:0060 loss_train: 0.7693 acc_train: 0.7188 time: 0.2281s
+[2022-06-25 07:11:57,614]iter:0080 loss_train: 0.8658 acc_train: 0.7188 time: 0.2188s
+[2022-06-25 07:12:06,323]iter:0100 loss_train: 0.6387 acc_train: 0.8125 time: 0.2308s
+[2022-06-25 07:12:15,507]iter:0120 loss_train: 0.9607 acc_train: 0.6406 time: 0.2521s
+[2022-06-25 07:12:23,671]iter:0140 loss_train: 0.9547 acc_train: 0.7031 time: 0.2232s
+[2022-06-25 07:12:29,839]this epoch:
+loss= 0.8757 accuracy= 0.7334
+[2022-06-25 07:12:29,885]Epoch: 0029
+[2022-06-25 07:12:39,039]iter:0020 loss_train: 0.6771 acc_train: 0.7500 time: 0.2570s
+[2022-06-25 07:12:47,476]iter:0040 loss_train: 0.8045 acc_train: 0.7656 time: 0.2424s
+[2022-06-25 07:12:56,746]iter:0060 loss_train: 1.1234 acc_train: 0.7031 time: 0.2437s
+[2022-06-25 07:13:06,150]iter:0080 loss_train: 0.6194 acc_train: 0.8281 time: 0.2330s
+[2022-06-25 07:13:15,345]iter:0100 loss_train: 0.8310 acc_train: 0.7812 time: 0.2242s
+[2022-06-25 07:13:24,935]iter:0120 loss_train: 1.0636 acc_train: 0.7188 time: 0.2330s
+[2022-06-25 07:13:33,767]iter:0140 loss_train: 0.9302 acc_train: 0.7188 time: 0.2444s
+[2022-06-25 07:13:40,798]this epoch:
+loss= 0.8862 accuracy= 0.7327
+[2022-06-25 07:13:40,810]Epoch: 0030
+[2022-06-25 07:13:49,857]iter:0020 loss_train: 0.8103 acc_train: 0.7656 time: 0.2229s
+[2022-06-25 07:13:59,308]iter:0040 loss_train: 0.7175 acc_train: 0.7656 time: 0.2566s
+[2022-06-25 07:14:08,567]iter:0060 loss_train: 0.8479 acc_train: 0.7656 time: 0.2055s
+[2022-06-25 07:14:17,811]iter:0080 loss_train: 1.1701 acc_train: 0.5781 time: 0.2226s
+[2022-06-25 07:14:26,593]iter:0100 loss_train: 1.2917 acc_train: 0.6094 time: 0.2233s
+[2022-06-25 07:14:35,954]iter:0120 loss_train: 0.9952 acc_train: 0.7188 time: 0.2598s
+[2022-06-25 07:14:44,950]iter:0140 loss_train: 0.6723 acc_train: 0.7500 time: 0.2203s
+[2022-06-25 07:14:51,240]this epoch:
+loss= 0.8689 accuracy= 0.7300
+[2022-06-25 07:14:51,297]Epoch: 0031
+[2022-06-25 07:14:59,720]iter:0020 loss_train: 0.7224 acc_train: 0.7500 time: 0.2440s
+[2022-06-25 07:15:08,718]iter:0040 loss_train: 0.7484 acc_train: 0.7969 time: 0.2320s
+[2022-06-25 07:15:17,967]iter:0060 loss_train: 0.5638 acc_train: 0.7969 time: 0.2363s
+[2022-06-25 07:15:26,529]iter:0080 loss_train: 0.8405 acc_train: 0.6719 time: 0.2243s
+[2022-06-25 07:15:35,294]iter:0100 loss_train: 0.8074 acc_train: 0.7344 time: 0.2230s
+[2022-06-25 07:15:44,820]iter:0120 loss_train: 1.2242 acc_train: 0.6406 time: 0.2234s
+[2022-06-25 07:15:54,331]iter:0140 loss_train: 0.8736 acc_train: 0.7500 time: 0.2226s
+[2022-06-25 07:16:01,370]this epoch:
+loss= 0.8610 accuracy= 0.7316
+[2022-06-25 07:16:01,379]Epoch: 0032
+[2022-06-25 07:16:10,069]iter:0020 loss_train: 0.9953 acc_train: 0.6875 time: 0.2553s
+[2022-06-25 07:16:18,944]iter:0040 loss_train: 0.9519 acc_train: 0.6562 time: 0.2237s
+[2022-06-25 07:16:28,876]iter:0060 loss_train: 0.7136 acc_train: 0.7500 time: 0.2247s
+[2022-06-25 07:16:37,836]iter:0080 loss_train: 0.8786 acc_train: 0.8125 time: 0.2258s
+[2022-06-25 07:16:47,145]iter:0100 loss_train: 0.7257 acc_train: 0.7812 time: 0.2227s
+[2022-06-25 07:16:55,606]iter:0120 loss_train: 0.7014 acc_train: 0.7812 time: 0.2229s
+[2022-06-25 07:17:04,103]iter:0140 loss_train: 1.0057 acc_train: 0.6562 time: 0.2228s
+[2022-06-25 07:17:10,678]this epoch:
+loss= 0.8620 accuracy= 0.7391
+[2022-06-25 07:17:10,687]Epoch: 0033
+[2022-06-25 07:17:19,509]iter:0020 loss_train: 0.8559 acc_train: 0.7344 time: 0.2158s
+[2022-06-25 07:17:28,125]iter:0040 loss_train: 0.9629 acc_train: 0.7188 time: 0.2288s
+[2022-06-25 07:17:37,636]iter:0060 loss_train: 0.7574 acc_train: 0.7969 time: 0.2124s
+[2022-06-25 07:17:46,446]iter:0080 loss_train: 0.6473 acc_train: 0.7969 time: 0.2232s
+[2022-06-25 07:17:55,772]iter:0100 loss_train: 0.6865 acc_train: 0.7656 time: 0.2336s
+[2022-06-25 07:18:04,811]iter:0120 loss_train: 1.1086 acc_train: 0.7344 time: 0.2419s
+[2022-06-25 07:18:14,518]iter:0140 loss_train: 0.6605 acc_train: 0.7969 time: 0.2222s
+[2022-06-25 07:18:21,408]this epoch:
+loss= 0.8561 accuracy= 0.7382
+[2022-06-25 07:18:21,418]Epoch: 0034
+[2022-06-25 07:18:30,255]iter:0020 loss_train: 0.6418 acc_train: 0.8281 time: 0.2232s
+[2022-06-25 07:18:39,728]iter:0040 loss_train: 0.9265 acc_train: 0.7500 time: 0.2121s
+[2022-06-25 07:18:49,118]iter:0060 loss_train: 0.9520 acc_train: 0.7188 time: 0.2098s
+[2022-06-25 07:18:58,095]iter:0080 loss_train: 0.7793 acc_train: 0.7812 time: 0.2218s
+[2022-06-25 07:19:06,776]iter:0100 loss_train: 0.6984 acc_train: 0.7031 time: 0.2188s
+[2022-06-25 07:19:15,517]iter:0120 loss_train: 0.9483 acc_train: 0.7344 time: 0.2583s
+[2022-06-25 07:19:23,892]iter:0140 loss_train: 0.7725 acc_train: 0.7500 time: 0.2229s
+[2022-06-25 07:19:30,641]this epoch:
+loss= 0.8553 accuracy= 0.7355
+[2022-06-25 07:19:30,652]Epoch: 0035
+[2022-06-25 07:19:39,270]iter:0020 loss_train: 1.0144 acc_train: 0.7188 time: 0.2236s
+[2022-06-25 07:19:48,445]iter:0040 loss_train: 0.8248 acc_train: 0.7344 time: 0.2222s
+[2022-06-25 07:19:58,089]iter:0060 loss_train: 0.5254 acc_train: 0.8750 time: 0.2267s
+[2022-06-25 07:20:07,011]iter:0080 loss_train: 0.9998 acc_train: 0.7656 time: 0.2368s
+[2022-06-25 07:20:15,702]iter:0100 loss_train: 0.7131 acc_train: 0.7656 time: 0.2300s
+[2022-06-25 07:20:24,912]iter:0120 loss_train: 0.8500 acc_train: 0.7188 time: 0.2367s
+[2022-06-25 07:20:34,177]iter:0140 loss_train: 0.8723 acc_train: 0.7188 time: 0.2583s
+[2022-06-25 07:20:41,437]this epoch:
+loss= 0.8617 accuracy= 0.7390
+[2022-06-25 07:20:41,446]Epoch: 0036
+[2022-06-25 07:20:50,023]iter:0020 loss_train: 0.6719 acc_train: 0.7969 time: 0.2122s
+[2022-06-25 07:20:59,048]iter:0040 loss_train: 0.9016 acc_train: 0.7656 time: 0.2228s
+[2022-06-25 07:21:08,886]iter:0060 loss_train: 1.0614 acc_train: 0.6875 time: 0.2107s
+[2022-06-25 07:21:17,771]iter:0080 loss_train: 0.6574 acc_train: 0.7656 time: 0.2594s
+[2022-06-25 07:21:26,805]iter:0100 loss_train: 0.8624 acc_train: 0.7812 time: 0.2229s
+[2022-06-25 07:21:35,940]iter:0120 loss_train: 0.9905 acc_train: 0.7031 time: 0.2330s
+[2022-06-25 07:21:44,922]iter:0140 loss_train: 0.7716 acc_train: 0.7500 time: 0.2483s
+[2022-06-25 07:21:51,743]this epoch:
+loss= 0.8481 accuracy= 0.7450
+[2022-06-25 07:21:51,749]Epoch: 0037
+[2022-06-25 07:22:01,049]iter:0020 loss_train: 0.7459 acc_train: 0.7344 time: 0.2657s
+[2022-06-25 07:22:10,323]iter:0040 loss_train: 0.7379 acc_train: 0.7969 time: 0.2314s
+[2022-06-25 07:22:19,941]iter:0060 loss_train: 0.7975 acc_train: 0.7031 time: 0.2720s
+[2022-06-25 07:22:29,112]iter:0080 loss_train: 0.8526 acc_train: 0.7188 time: 0.2349s
+[2022-06-25 07:22:38,165]iter:0100 loss_train: 1.0218 acc_train: 0.6875 time: 0.2225s
+[2022-06-25 07:22:47,140]iter:0120 loss_train: 0.9055 acc_train: 0.7344 time: 0.2223s
+[2022-06-25 07:22:56,018]iter:0140 loss_train: 1.0475 acc_train: 0.7031 time: 0.2278s
+[2022-06-25 07:23:02,889]this epoch:
+loss= 0.8404 accuracy= 0.7394
+[2022-06-25 07:23:02,900]Epoch: 0038
+[2022-06-25 07:23:11,215]iter:0020 loss_train: 0.9119 acc_train: 0.7656 time: 0.2211s
+[2022-06-25 07:23:20,225]iter:0040 loss_train: 1.0945 acc_train: 0.7188 time: 0.2321s
+[2022-06-25 07:23:29,504]iter:0060 loss_train: 0.6942 acc_train: 0.8125 time: 0.2526s
+[2022-06-25 07:23:38,176]iter:0080 loss_train: 0.6919 acc_train: 0.8281 time: 0.2229s
+[2022-06-25 07:23:47,640]iter:0100 loss_train: 0.9131 acc_train: 0.6875 time: 0.2632s
+[2022-06-25 07:23:56,731]iter:0120 loss_train: 0.7697 acc_train: 0.7969 time: 0.2293s
+[2022-06-25 07:24:05,996]iter:0140 loss_train: 0.6279 acc_train: 0.7344 time: 0.2278s
+[2022-06-25 07:24:12,815]this epoch:
+loss= 0.8304 accuracy= 0.7467
+[2022-06-25 07:24:12,825]Epoch: 0039
+[2022-06-25 07:24:22,239]iter:0020 loss_train: 1.0165 acc_train: 0.6562 time: 0.2291s
+[2022-06-25 07:24:32,057]iter:0040 loss_train: 0.8182 acc_train: 0.7344 time: 0.2489s
+[2022-06-25 07:24:41,375]iter:0060 loss_train: 0.8621 acc_train: 0.7031 time: 0.2624s
+[2022-06-25 07:24:49,984]iter:0080 loss_train: 0.7750 acc_train: 0.7500 time: 0.2278s
+[2022-06-25 07:24:59,115]iter:0100 loss_train: 0.9687 acc_train: 0.6406 time: 0.2465s
+[2022-06-25 07:25:07,948]iter:0120 loss_train: 0.9281 acc_train: 0.6875 time: 0.2252s
+[2022-06-25 07:25:17,600]iter:0140 loss_train: 0.5843 acc_train: 0.8750 time: 0.2178s
+[2022-06-25 07:25:25,071]this epoch:
+loss= 0.8215 accuracy= 0.7497
+[2022-06-25 07:25:25,083]Epoch: 0040
+[2022-06-25 07:25:34,181]iter:0020 loss_train: 0.8307 acc_train: 0.7656 time: 0.2228s
+[2022-06-25 07:25:43,594]iter:0040 loss_train: 0.7262 acc_train: 0.7969 time: 0.2219s
+[2022-06-25 07:25:53,519]iter:0060 loss_train: 0.7919 acc_train: 0.8125 time: 0.2407s
+[2022-06-25 07:26:02,291]iter:0080 loss_train: 0.7148 acc_train: 0.7969 time: 0.2654s
+[2022-06-25 07:26:11,128]iter:0100 loss_train: 0.6706 acc_train: 0.8438 time: 0.2428s
+[2022-06-25 07:26:19,950]iter:0120 loss_train: 0.8371 acc_train: 0.7812 time: 0.2242s
+[2022-06-25 07:26:29,463]iter:0140 loss_train: 0.7222 acc_train: 0.8125 time: 0.2230s
+[2022-06-25 07:26:35,604]this epoch:
+loss= 0.8215 accuracy= 0.7534
+[2022-06-25 07:26:35,614]Epoch: 0041
+[2022-06-25 07:26:44,312]iter:0020 loss_train: 0.7640 acc_train: 0.7500 time: 0.2544s
+[2022-06-25 07:26:52,918]iter:0040 loss_train: 0.9580 acc_train: 0.7812 time: 0.2459s
+[2022-06-25 07:27:02,053]iter:0060 loss_train: 0.6414 acc_train: 0.7812 time: 0.2252s
+[2022-06-25 07:27:10,812]iter:0080 loss_train: 0.8503 acc_train: 0.7188 time: 0.2240s
+[2022-06-25 07:27:19,031]iter:0100 loss_train: 0.8918 acc_train: 0.7188 time: 0.2328s
+[2022-06-25 07:27:28,011]iter:0120 loss_train: 0.6349 acc_train: 0.7656 time: 0.2502s
+[2022-06-25 07:27:36,311]iter:0140 loss_train: 1.0766 acc_train: 0.6719 time: 0.2241s
+[2022-06-25 07:27:43,080]this epoch:
+loss= 0.8268 accuracy= 0.7435
+[2022-06-25 07:27:43,089]Epoch: 0042
+[2022-06-25 07:27:52,620]iter:0020 loss_train: 0.8110 acc_train: 0.7656 time: 0.2251s
+[2022-06-25 07:28:02,253]iter:0040 loss_train: 0.6572 acc_train: 0.7969 time: 0.2195s
+[2022-06-25 07:28:11,626]iter:0060 loss_train: 0.7221 acc_train: 0.7656 time: 0.2726s
+[2022-06-25 07:28:20,635]iter:0080 loss_train: 0.9433 acc_train: 0.7344 time: 0.2229s
+[2022-06-25 07:28:29,941]iter:0100 loss_train: 0.7196 acc_train: 0.7344 time: 0.2246s
+[2022-06-25 07:28:39,454]iter:0120 loss_train: 0.5685 acc_train: 0.8594 time: 0.2229s
+[2022-06-25 07:28:48,444]iter:0140 loss_train: 0.5507 acc_train: 0.8281 time: 0.2535s
+[2022-06-25 07:28:54,640]this epoch:
+loss= 0.7624 accuracy= 0.7693
+[2022-06-25 07:28:54,650]Epoch: 0043
+[2022-06-25 07:29:03,236]iter:0020 loss_train: 1.0444 acc_train: 0.7656 time: 0.2236s
+[2022-06-25 07:29:12,331]iter:0040 loss_train: 0.7844 acc_train: 0.7188 time: 0.2140s
+[2022-06-25 07:29:21,291]iter:0060 loss_train: 0.8788 acc_train: 0.7969 time: 0.2148s
+[2022-06-25 07:29:31,209]iter:0080 loss_train: 1.0353 acc_train: 0.6875 time: 0.2257s
+[2022-06-25 07:29:40,258]iter:0100 loss_train: 0.6625 acc_train: 0.7969 time: 0.2207s
+[2022-06-25 07:29:49,722]iter:0120 loss_train: 0.7339 acc_train: 0.8125 time: 0.2294s
+[2022-06-25 07:29:58,860]iter:0140 loss_train: 1.0427 acc_train: 0.7500 time: 0.2320s
+[2022-06-25 07:30:05,949]this epoch:
+loss= 0.7598 accuracy= 0.7664
+[2022-06-25 07:30:05,959]Epoch: 0044
+[2022-06-25 07:30:15,099]iter:0020 loss_train: 0.6624 acc_train: 0.8125 time: 0.2256s
+[2022-06-25 07:30:24,646]iter:0040 loss_train: 0.7041 acc_train: 0.8125 time: 0.2426s
+[2022-06-25 07:30:33,161]iter:0060 loss_train: 0.7163 acc_train: 0.7812 time: 0.2212s
+[2022-06-25 07:30:42,247]iter:0080 loss_train: 0.8796 acc_train: 0.7812 time: 0.2698s
+[2022-06-25 07:30:51,359]iter:0100 loss_train: 0.7341 acc_train: 0.7031 time: 0.2233s
+[2022-06-25 07:30:59,800]iter:0120 loss_train: 0.4906 acc_train: 0.8594 time: 0.2311s
+[2022-06-25 07:31:08,372]iter:0140 loss_train: 1.0247 acc_train: 0.7188 time: 0.2239s
+[2022-06-25 07:31:15,081]this epoch:
+loss= 0.7544 accuracy= 0.7704
+[2022-06-25 07:31:15,122]Epoch: 0045
+[2022-06-25 07:31:23,560]iter:0020 loss_train: 0.9190 acc_train: 0.7344 time: 0.2144s
+[2022-06-25 07:31:32,540]iter:0040 loss_train: 0.3875 acc_train: 0.8906 time: 0.2249s
+[2022-06-25 07:31:41,619]iter:0060 loss_train: 0.5395 acc_train: 0.8125 time: 0.2349s
+[2022-06-25 07:31:50,547]iter:0080 loss_train: 0.6040 acc_train: 0.8281 time: 0.2426s
+[2022-06-25 07:31:59,290]iter:0100 loss_train: 0.9862 acc_train: 0.6562 time: 0.2325s
+[2022-06-25 07:32:08,022]iter:0120 loss_train: 0.7261 acc_train: 0.7812 time: 0.2471s
+[2022-06-25 07:32:17,283]iter:0140 loss_train: 0.6777 acc_train: 0.7656 time: 0.2442s
+[2022-06-25 07:32:23,735]this epoch:
+loss= 0.7465 accuracy= 0.7748
+[2022-06-25 07:32:23,745]Epoch: 0046
+[2022-06-25 07:32:32,821]iter:0020 loss_train: 0.7536 acc_train: 0.7656 time: 0.2469s
+[2022-06-25 07:32:41,726]iter:0040 loss_train: 0.6050 acc_train: 0.8438 time: 0.2208s
+[2022-06-25 07:32:50,288]iter:0060 loss_train: 0.6736 acc_train: 0.8125 time: 0.2116s
+[2022-06-25 07:32:59,426]iter:0080 loss_train: 0.5495 acc_train: 0.8438 time: 0.2310s
+[2022-06-25 07:33:08,322]iter:0100 loss_train: 0.7055 acc_train: 0.7500 time: 0.2435s
+[2022-06-25 07:33:17,322]iter:0120 loss_train: 0.7107 acc_train: 0.7969 time: 0.2266s
+[2022-06-25 07:33:26,175]iter:0140 loss_train: 0.5381 acc_train: 0.8750 time: 0.2239s
+[2022-06-25 07:33:33,415]this epoch:
+loss= 0.7508 accuracy= 0.7727
+[2022-06-25 07:33:33,427]Epoch: 0047
+[2022-06-25 07:33:42,167]iter:0020 loss_train: 0.7325 acc_train: 0.7656 time: 0.2290s
+[2022-06-25 07:33:50,297]iter:0040 loss_train: 0.8825 acc_train: 0.7500 time: 0.2228s
+[2022-06-25 07:33:59,237]iter:0060 loss_train: 0.8175 acc_train: 0.7812 time: 0.2262s
+[2022-06-25 07:34:07,883]iter:0080 loss_train: 0.9537 acc_train: 0.7656 time: 0.2327s
+[2022-06-25 07:34:17,540]iter:0100 loss_train: 0.9702 acc_train: 0.7500 time: 0.2301s
+[2022-06-25 07:34:26,344]iter:0120 loss_train: 0.7953 acc_train: 0.8281 time: 0.2311s
+[2022-06-25 07:34:36,107]iter:0140 loss_train: 0.7743 acc_train: 0.7812 time: 0.2275s
+[2022-06-25 07:34:42,398]this epoch:
+loss= 0.7524 accuracy= 0.7717
+[2022-06-25 07:34:42,408]Epoch: 0048
+[2022-06-25 07:34:51,101]iter:0020 loss_train: 0.8790 acc_train: 0.7031 time: 0.2361s
+[2022-06-25 07:34:59,829]iter:0040 loss_train: 0.6542 acc_train: 0.8281 time: 0.2280s
+[2022-06-25 07:35:08,684]iter:0060 loss_train: 0.5354 acc_train: 0.8438 time: 0.2315s
+[2022-06-25 07:35:18,035]iter:0080 loss_train: 0.7567 acc_train: 0.7812 time: 0.2228s
+[2022-06-25 07:35:27,178]iter:0100 loss_train: 0.9316 acc_train: 0.6875 time: 0.2248s
+[2022-06-25 07:35:35,671]iter:0120 loss_train: 0.6109 acc_train: 0.8438 time: 0.2188s
+[2022-06-25 07:35:45,354]iter:0140 loss_train: 0.6974 acc_train: 0.8125 time: 0.2233s
+[2022-06-25 07:35:52,504]this epoch:
+loss= 0.7541 accuracy= 0.7746
+[2022-06-25 07:35:52,515]Epoch: 0049
+[2022-06-25 07:36:01,443]iter:0020 loss_train: 0.5465 acc_train: 0.8281 time: 0.2427s
+[2022-06-25 07:36:10,028]iter:0040 loss_train: 0.8258 acc_train: 0.7500 time: 0.2233s
+[2022-06-25 07:36:19,376]iter:0060 loss_train: 0.9843 acc_train: 0.6875 time: 0.2344s
+[2022-06-25 07:36:28,620]iter:0080 loss_train: 0.7986 acc_train: 0.7500 time: 0.2191s
+[2022-06-25 07:36:38,026]iter:0100 loss_train: 0.7225 acc_train: 0.7812 time: 0.2234s
+[2022-06-25 07:36:46,638]iter:0120 loss_train: 0.6129 acc_train: 0.8125 time: 0.2632s
+[2022-06-25 07:36:56,161]iter:0140 loss_train: 0.7544 acc_train: 0.7500 time: 0.2579s
+[2022-06-25 07:37:03,180]this epoch:
+loss= 0.7488 accuracy= 0.7686
+[2022-06-25 07:37:03,189]Epoch: 0050
+[2022-06-25 07:37:11,567]iter:0020 loss_train: 0.5460 acc_train: 0.8281 time: 0.2220s
+[2022-06-25 07:37:20,278]iter:0040 loss_train: 0.6977 acc_train: 0.7656 time: 0.2212s
+[2022-06-25 07:37:29,584]iter:0060 loss_train: 0.9592 acc_train: 0.6875 time: 0.2705s
+[2022-06-25 07:37:38,273]iter:0080 loss_train: 0.7559 acc_train: 0.7500 time: 0.2342s
+[2022-06-25 07:37:47,100]iter:0100 loss_train: 0.6114 acc_train: 0.7812 time: 0.2608s
+[2022-06-25 07:37:56,293]iter:0120 loss_train: 0.9611 acc_train: 0.8125 time: 0.2473s
+[2022-06-25 07:38:05,033]iter:0140 loss_train: 0.6257 acc_train: 0.7969 time: 0.2290s
+[2022-06-25 07:38:11,985]this epoch:
+loss= 0.7482 accuracy= 0.7699
+[2022-06-25 07:38:12,021]Epoch: 0051
+[2022-06-25 07:38:20,148]iter:0020 loss_train: 0.6633 acc_train: 0.7500 time: 0.2374s
+[2022-06-25 07:38:28,836]iter:0040 loss_train: 0.6062 acc_train: 0.8125 time: 0.2233s
+[2022-06-25 07:38:38,313]iter:0060 loss_train: 0.8269 acc_train: 0.7656 time: 0.2216s
+[2022-06-25 07:38:46,913]iter:0080 loss_train: 0.6312 acc_train: 0.7969 time: 0.2245s
+[2022-06-25 07:38:55,376]iter:0100 loss_train: 0.5832 acc_train: 0.8125 time: 0.2225s
+[2022-06-25 07:39:04,777]iter:0120 loss_train: 0.8206 acc_train: 0.7344 time: 0.2321s
+[2022-06-25 07:39:14,388]iter:0140 loss_train: 0.9671 acc_train: 0.6875 time: 0.2373s
+[2022-06-25 07:39:20,633]this epoch:
+loss= 0.7584 accuracy= 0.7674
+[2022-06-25 07:39:20,645]Epoch: 0052
+[2022-06-25 07:39:28,782]iter:0020 loss_train: 0.8392 acc_train: 0.7969 time: 0.2239s
+[2022-06-25 07:39:37,440]iter:0040 loss_train: 0.6097 acc_train: 0.7500 time: 0.2226s
+[2022-06-25 07:39:46,282]iter:0060 loss_train: 0.7055 acc_train: 0.7656 time: 0.2542s
+[2022-06-25 07:39:55,401]iter:0080 loss_train: 0.6584 acc_train: 0.8125 time: 0.2409s
+[2022-06-25 07:40:04,924]iter:0100 loss_train: 0.8306 acc_train: 0.6562 time: 0.2240s
+[2022-06-25 07:40:14,481]iter:0120 loss_train: 0.6561 acc_train: 0.7188 time: 0.2674s
+[2022-06-25 07:40:23,059]iter:0140 loss_train: 0.7690 acc_train: 0.8125 time: 0.2245s
+[2022-06-25 07:40:29,806]this epoch:
+loss= 0.7479 accuracy= 0.7730
+[2022-06-25 07:40:29,817]Epoch: 0053
+[2022-06-25 07:40:38,502]iter:0020 loss_train: 0.6773 acc_train: 0.7656 time: 0.2121s
+[2022-06-25 07:40:47,515]iter:0040 loss_train: 0.7538 acc_train: 0.7500 time: 0.2236s
+[2022-06-25 07:40:56,738]iter:0060 loss_train: 0.7733 acc_train: 0.7656 time: 0.2249s
+[2022-06-25 07:41:06,281]iter:0080 loss_train: 0.7017 acc_train: 0.7812 time: 0.2486s
+[2022-06-25 07:41:15,289]iter:0100 loss_train: 0.7501 acc_train: 0.7656 time: 0.2230s
+[2022-06-25 07:41:24,715]iter:0120 loss_train: 0.6517 acc_train: 0.8281 time: 0.2227s
+[2022-06-25 07:41:33,959]iter:0140 loss_train: 0.9826 acc_train: 0.7188 time: 0.3217s
+[2022-06-25 07:41:40,916]this epoch:
+loss= 0.7458 accuracy= 0.7695
+[2022-06-25 07:41:40,936]Epoch: 0054
+[2022-06-25 07:41:49,489]iter:0020 loss_train: 0.8958 acc_train: 0.7188 time: 0.2239s
+[2022-06-25 07:41:58,611]iter:0040 loss_train: 0.6791 acc_train: 0.7188 time: 0.2231s
+[2022-06-25 07:42:07,693]iter:0060 loss_train: 0.6887 acc_train: 0.7656 time: 0.2329s
+[2022-06-25 07:42:16,715]iter:0080 loss_train: 0.6169 acc_train: 0.7812 time: 0.2522s
+[2022-06-25 07:42:25,599]iter:0100 loss_train: 0.8242 acc_train: 0.7969 time: 0.2470s
+[2022-06-25 07:42:33,846]iter:0120 loss_train: 0.6568 acc_train: 0.8438 time: 0.2128s
+[2022-06-25 07:42:42,949]iter:0140 loss_train: 0.7697 acc_train: 0.7500 time: 0.2404s
+[2022-06-25 07:42:49,117]this epoch:
+loss= 0.7444 accuracy= 0.7725
+[2022-06-25 07:42:49,134]Epoch: 0055
+[2022-06-25 07:42:57,261]iter:0020 loss_train: 0.7801 acc_train: 0.7344 time: 0.2098s
+[2022-06-25 07:43:07,333]iter:0040 loss_train: 0.7536 acc_train: 0.7969 time: 0.2367s
+[2022-06-25 07:43:16,549]iter:0060 loss_train: 0.8560 acc_train: 0.7031 time: 0.2251s
+[2022-06-25 07:43:25,987]iter:0080 loss_train: 0.6835 acc_train: 0.8125 time: 0.2231s
+[2022-06-25 07:43:34,443]iter:0100 loss_train: 0.8557 acc_train: 0.7344 time: 0.2490s
+[2022-06-25 07:43:42,714]iter:0120 loss_train: 0.5220 acc_train: 0.8281 time: 0.2518s
+[2022-06-25 07:43:51,597]iter:0140 loss_train: 0.7506 acc_train: 0.7344 time: 0.2486s
+[2022-06-25 07:43:57,588]this epoch:
+loss= 0.7573 accuracy= 0.7725
+[2022-06-25 07:43:57,598]Epoch: 0056
+[2022-06-25 07:44:06,597]iter:0020 loss_train: 0.7100 acc_train: 0.7500 time: 0.2406s
+[2022-06-25 07:44:16,019]iter:0040 loss_train: 0.7342 acc_train: 0.7969 time: 0.2211s
+[2022-06-25 07:44:24,977]iter:0060 loss_train: 0.5074 acc_train: 0.8750 time: 0.2603s
+[2022-06-25 07:44:33,902]iter:0080 loss_train: 0.7400 acc_train: 0.7969 time: 0.2112s
+[2022-06-25 07:44:43,645]iter:0100 loss_train: 0.7572 acc_train: 0.7812 time: 0.2242s
+[2022-06-25 07:44:52,456]iter:0120 loss_train: 0.8132 acc_train: 0.7656 time: 0.2273s
+[2022-06-25 07:45:00,761]iter:0140 loss_train: 0.7700 acc_train: 0.7188 time: 0.2259s
+[2022-06-25 07:45:07,430]this epoch:
+loss= 0.7469 accuracy= 0.7729
+[2022-06-25 07:45:07,440]Epoch: 0057
+[2022-06-25 07:45:15,927]iter:0020 loss_train: 0.5864 acc_train: 0.8438 time: 0.2363s
+[2022-06-25 07:45:25,149]iter:0040 loss_train: 0.7768 acc_train: 0.8125 time: 0.2233s
+[2022-06-25 07:45:34,393]iter:0060 loss_train: 0.9564 acc_train: 0.7031 time: 0.2751s
+[2022-06-25 07:45:43,493]iter:0080 loss_train: 0.6501 acc_train: 0.8125 time: 0.2241s
+[2022-06-25 07:45:51,705]iter:0100 loss_train: 0.4812 acc_train: 0.8594 time: 0.2270s
+[2022-06-25 07:46:01,086]iter:0120 loss_train: 0.7105 acc_train: 0.8281 time: 0.2564s
+[2022-06-25 07:46:09,225]iter:0140 loss_train: 0.7305 acc_train: 0.7500 time: 0.2515s
+[2022-06-25 07:46:15,932]this epoch:
+loss= 0.7371 accuracy= 0.7749
+[2022-06-25 07:46:15,941]Epoch: 0058
+[2022-06-25 07:46:24,619]iter:0020 loss_train: 0.7132 acc_train: 0.7656 time: 0.2307s
+[2022-06-25 07:46:33,800]iter:0040 loss_train: 0.6352 acc_train: 0.8750 time: 0.2358s
+[2022-06-25 07:46:42,758]iter:0060 loss_train: 0.9187 acc_train: 0.7500 time: 0.2312s
+[2022-06-25 07:46:52,171]iter:0080 loss_train: 0.9504 acc_train: 0.7344 time: 0.2256s
+[2022-06-25 07:47:02,133]iter:0100 loss_train: 0.8260 acc_train: 0.7500 time: 0.2226s
+[2022-06-25 07:47:10,961]iter:0120 loss_train: 0.7890 acc_train: 0.7344 time: 0.2210s
+[2022-06-25 07:47:20,064]iter:0140 loss_train: 0.7976 acc_train: 0.7969 time: 0.2241s
+[2022-06-25 07:47:27,401]this epoch:
+loss= 0.7361 accuracy= 0.7761
+[2022-06-25 07:47:27,411]Epoch: 0059
+[2022-06-25 07:47:36,035]iter:0020 loss_train: 0.5777 acc_train: 0.8281 time: 0.2245s
+[2022-06-25 07:47:45,158]iter:0040 loss_train: 0.7663 acc_train: 0.7812 time: 0.2247s
+[2022-06-25 07:47:54,235]iter:0060 loss_train: 0.7187 acc_train: 0.8125 time: 0.2228s
+[2022-06-25 07:48:02,950]iter:0080 loss_train: 0.5097 acc_train: 0.8438 time: 0.2089s
+[2022-06-25 07:48:12,311]iter:0100 loss_train: 0.6410 acc_train: 0.7812 time: 0.2448s
+[2022-06-25 07:48:20,564]iter:0120 loss_train: 0.7985 acc_train: 0.8438 time: 0.2499s
+[2022-06-25 07:48:29,467]iter:0140 loss_train: 0.6277 acc_train: 0.8906 time: 0.2484s
+[2022-06-25 07:48:36,788]this epoch:
+loss= 0.7463 accuracy= 0.7728
+[2022-06-25 07:48:36,798]Epoch: 0060
+[2022-06-25 07:48:45,550]iter:0020 loss_train: 0.6924 acc_train: 0.8125 time: 0.2251s
+[2022-06-25 07:48:54,412]iter:0040 loss_train: 0.6220 acc_train: 0.8125 time: 0.2228s
+[2022-06-25 07:49:03,250]iter:0060 loss_train: 0.5767 acc_train: 0.8125 time: 0.2584s
+[2022-06-25 07:49:12,339]iter:0080 loss_train: 0.6141 acc_train: 0.8281 time: 0.2117s
+[2022-06-25 07:49:21,727]iter:0100 loss_train: 0.7618 acc_train: 0.8125 time: 0.2232s
+[2022-06-25 07:49:30,924]iter:0120 loss_train: 0.5258 acc_train: 0.8281 time: 0.2190s
+[2022-06-25 07:49:39,725]iter:0140 loss_train: 0.7185 acc_train: 0.7812 time: 0.2207s
+[2022-06-25 07:49:46,263]this epoch:
+loss= 0.7357 accuracy= 0.7758
+[2022-06-25 07:49:46,273]Optimization Finished!
+[2022-06-25 07:49:46,275]Total time elapsed: 4034.0370s
+[2022-06-25 07:49:46,275]the best accuarcy is 0.7761
