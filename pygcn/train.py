@@ -10,8 +10,7 @@ import torch.nn.functional as F
 import torch.optim as optim
 
 from utils import load_data, accuracy,build_graph,get_logger
-from models import GCN
-
+from models import GCN,PointNet,DGCNN
 # Training settings
 parser = argparse.ArgumentParser()
 parser.add_argument('--no-cuda', action='store_true', default=False, #默认不使用cuda
@@ -26,14 +25,16 @@ parser.add_argument('--dropout', type=float, default=0.5,
 
 parser.add_argument('--epochs', type=int, default=60,  #训练epoch
                     help='Number of epochs to train.')
-parser.add_argument('--lr', type=float, default= 0.1, #学习率
+parser.add_argument('--lr', type=float, default= 0.01, #学习率
                     help='Initial learning rate.')
 parser.add_argument('--batch_size', type=int, default=64, 
                     help='batch size.')
 parser.add_argument('--knn_param', type=int, default=50, 
                     help='top-k nearest neighbors.')
-parser.add_argument('--lr_step', type=int, default=10, 
+parser.add_argument('--lr_step', type=int, default=15, 
                     help='update learning rate every n steps')
+parser.add_argument('--lr_decay', type=float, default=0.1, 
+                    help='decay learning rate every n steps')
                     
 parser.add_argument('--test_mode', action='store_true', default=False, 
                     help='test using saved model.')
@@ -68,7 +69,7 @@ model = GCN(nfeat=3,
             dropout=args.dropout)
 optimizer = optim.Adam(model.parameters(),
                        lr=args.lr, weight_decay=args.weight_decay)
-scheduler = optim.lr_scheduler.StepLR(optimizer,args.lr_step, gamma = 0.5)
+scheduler = optim.lr_scheduler.StepLR(optimizer,args.lr_step, gamma = args.lr_decay)
 scheduler.last_epoch = args.last_epoch
 
 #load logger
@@ -77,11 +78,11 @@ logger = get_logger(args.logger)
 if args.cuda:
     model.cuda()
 
-
 def train(epoch,best_accuracy = 0):
     iter = 0
     all_loss = []
-    all_acc = []
+    all_corr = 0
+    data_num = 0
     logger.info('Epoch: {:04d}'.format(epoch+1))
     for data,labels in train_loader:
         t = time.time()
@@ -92,20 +93,22 @@ def train(epoch,best_accuracy = 0):
             labels = labels.cuda()
         adj_matrix = build_graph(data, k = args.knn_param)
         output = model(data, adj_matrix)
-        loss_train = F.nll_loss(output, labels)
-        acc_train = accuracy(output, labels)
-        loss_train.backward()
+        loss_train = F.nll_loss(output, labels) #+ loss
+        correct,num = accuracy(output, labels)
+        loss_train.backward() 
+
         optimizer.step()
-        all_acc.append(acc_train)
+        data_num += num
+        all_corr += correct
         all_loss.append(loss_train)
         iter += 1
         if iter % 20 == 19:
             logger.info('iter:{:04d} '.format(iter + 1) +
                 'loss_train: {:.4f} '.format(loss_train.item()) +
-                'acc_train: {:.4f} '.format(acc_train.item()) +
+                'acc_train: {:.4f} '.format(correct / num) +
                 'time: {:.4f}s'.format(time.time() - t))
     
-    mean_acc = torch.tensor(all_acc).mean().item()
+    mean_acc = all_corr / data_num
     if mean_acc > best_accuracy:
         torch.save(model.state_dict(), args.best_model)
         best_accuracy = mean_acc 
@@ -120,8 +123,9 @@ def train(epoch,best_accuracy = 0):
 
 def test():
     model.eval()
-    all_acc = []
     all_loss = []
+    all_corr = 0
+    data_num = 0
     for data,labels in test_loader:
         t = time.time()
         if args.cuda:
@@ -129,14 +133,15 @@ def test():
             labels = labels.cuda()
         adj_matrix = build_graph(data,k = args.knn_param)
         output = model(data, adj_matrix) #batch_size * nclass
-        loss_test = F.nll_loss(output, labels)
-        acc_test = accuracy(output, labels)
-        all_acc.append(acc_test)
+        loss_test = F.nll_loss(output, labels)# + loss
+        correct,num = accuracy(output, labels)
+        data_num += num
+        all_corr += correct
         all_loss.append(loss_test)
 
     logger.info("Test set results: "+
           "loss= {:.4f} ".format(torch.tensor(all_loss).mean().item()) + 
-          "accuracy= {:.4f}".format(torch.tensor(all_acc).mean().item()))
+          "accuracy= {:.4f}".format(all_corr / data_num))
 
 
 # Train model
