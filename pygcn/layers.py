@@ -57,16 +57,27 @@ class GraphPooling(Module):
         select_points = int(self.ratio * num_points)
         if self.ratio == 0:
             select_points = 1
-        attn = F.softmax(self.attn(x,adj).squeeze(-1),dim = 1) #batch * num_points * 1 ->batch * num_points
-        _,idx = attn.topk(select_points ,dim = 1)
-        x,adj = self.coarsen(x,adj,idx) #batch_size * (ratio * num_points) * in_features
+        attn = self.attn(x,adj).squeeze(-1)#batch * num_points
+        _,idx = attn.topk(select_points,dim = 1)
+        x,adj = self.coarsen(x,adj,attn,idx) #batch_size * (ratio * num_points) * in_features
         return x,adj
 
     @staticmethod
-    def coarsen(x,adj,idx):
+    def coarsen(x,adj,attn,idx):
         batch_size = x.shape[0]
         seq = torch.arange(batch_size)
-        x = x[seq,idx.T].transpose(0,1)  #根据idx取子图节点
+        attn = attn[seq,idx.T].transpose(0,1) #batch_size * nummpoints
+        x = x[seq,idx.T].transpose(0,1)  #根据idx取子图节点 batch_size * num_points * dim
+
+        attn = torch.tanh(attn)
+        x = x * attn.unsqueeze(dim = 2)
+
         adj = adj[seq,idx.T].transpose(0,1) #根据idx取子图邻接矩阵的行
         adj = adj[seq,:,idx.T].transpose(0,1) #根据idx取子图邻接矩阵的列
-        return x.contiguous(),adj
+        return x,adj
+
+if __name__ == "__main__":
+    a = torch.tensor([[[1,2],[3,4],[5,6]],[[6,5],[4,3],[2,1]]])#2*3*2
+    b = torch.tensor([[1,2,3],[4,5,6]])
+    print(a * b.unsqueeze(2))
+

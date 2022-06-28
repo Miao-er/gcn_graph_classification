@@ -96,7 +96,7 @@ class ModelNet40(Dataset):
         pointcloud = self.data[item][:self.num_points]
         label = self.label[item]
 
-        #pointcloud = translate_pointcloud(pointcloud)
+        pointcloud = translate_pointcloud(pointcloud)
         if self.partition == 'train':
             np.random.shuffle(pointcloud)
         return pointcloud, label
