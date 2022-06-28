@@ -63,11 +63,6 @@ def load_raw_data(partition):
     return all_data, all_label 
 
 def translate_pointcloud(pointcloud):
-    # xyz1 = np.random.uniform(low=0.9, high=1.1, size=[3])
-    # xyz2 = np.random.uniform(low=-0.2, high=0.2, size=[3])
-       
-    # translated_pointcloud = np.add(np.multiply(pointcloud, xyz1), xyz2).astype('float32')
-
     x_max = pointcloud.max(axis = 0)
     x_min = pointcloud.min(axis = 0)
     x_mid = (x_max + x_min)/2
@@ -96,9 +91,6 @@ class ModelNet40(Dataset):
         return self.data.shape[0]
 
 def load_data(batch_size,tag):
-    '''
-    点云数据记载
-    '''
     data = ModelNet40(2048,tag)
     if tag == 'train':
         loader = DataLoader(dataset=data,batch_size = batch_size,shuffle = True)
@@ -123,7 +115,7 @@ def knn(x, k):
     # mask = torch.zeros_like(weight).bool()
     # mask[idx] = True
     # weight[~mask] = 0
-    # weight = weight.reshape(batch_size,num_points,num_points)
+    # weight = weight.reshape(batch_size,num_points,num_points)                                                                  
     mask = torch.zeros_like(pairwise_distance.reshape(-1),device = x.device)
     mask[idx] = 1.0
     mask = mask.reshape(batch_size,num_points,num_points)

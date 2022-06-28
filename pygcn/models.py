@@ -1,64 +1,110 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from layers import GraphConvolution,GraphPooling
-
+from layers import GraphConvolution
 
 class GCN(nn.Module):
     def __init__(self, nfeat, nhid, nclass, dropout):
         super(GCN, self).__init__()
-        self.gc1 = GraphConvolution(nfeat, nhid,bias = True)
-        #self.gc4 = GraphConvolution(nfeat, nhid,bias = True)
-        self.gc2 = GraphConvolution(nhid, 2 * nhid,bias = True)
-        self.gc3 = GraphConvolution(2 * nhid, 4 * nhid,bias = True)
-        #self.gc3 = GraphConvolution(2 * nhid, 4*nhid,bias = True)
+        # self.gc1 = GraphConvolution(nfeat, nhid,bias = True)
+        # self.gc4 = GraphConvolution(nhid, nhid,bias = True)
+        # self.gc2 = GraphConvolution(nhid, 2 * nhid,bias = True)
+        # self.gc3 = GraphConvolution(2 * nhid, 4 * nhid,bias = True)
+
+        # self.bn1 = nn.BatchNorm1d(nhid)
+        # self.bn6 = nn.BatchNorm1d(nhid)
+        # self.bn2 = nn.BatchNorm1d(2 * nhid)
+        # self.bn3 = nn.BatchNorm1d(4 * nhid)
+
+        # self.fc1 = nn.Linear(16 * nhid,8 * nhid,bias = True)
+        # self.fc2 = nn.Linear(8 * nhid,4 * nhid,bias = True)
+        # self.fc3 = nn.Linear( 4 * nhid,nclass,bias = True)
+        # self.bn4 = nn.BatchNorm1d(8 * nhid)
+        # self.bn5 = nn.BatchNorm1d(4 * nhid)
+        self.gc1 = GraphConvolution(nfeat,nhid)
         self.bn1 = nn.BatchNorm1d(nhid)
-        self.bn2 = nn.BatchNorm1d(2 * nhid)
-        self.bn3 = nn.BatchNorm1d(4 * nhid)
+        self.gc2 = GraphConvolution(2 * nhid,2*nhid)
+        self.bn2 = nn.BatchNorm1d(2*nhid)
+        self.gc3 = GraphConvolution(4 * nhid,4*nhid)
+        self.bn3 = nn.BatchNorm1d(4*nhid)
+        self.gc4 = GraphConvolution(8 * nhid,8*nhid)
+        self.bn0 = nn.BatchNorm1d(8*nhid)
 
-        self.pool1 = GraphPooling(nhid,ratio = 0.5)
-        self.pool2 = GraphPooling(2 * nhid,ratio = 0.5)
-        self.pool3 = GraphPooling(4 * nhid,ratio = 0.5)
-
-
-        self.fc1 = nn.Linear(14 * nhid,7 * nhid,bias = True)
-        self.fc2 = nn.Linear(7 * nhid,4 * nhid,bias = True)
-        self.fc3 = nn.Linear( 4 * nhid,nclass,bias = True)
-        self.bn4 = nn.BatchNorm1d(7 * nhid)
-        self.bn5 = nn.BatchNorm1d(4 * nhid)
-        self.dp = nn.Dropout(dropout)
+        self.fc1 = nn.Linear(16*nhid,4*nhid)
+        self.bn4 = nn.BatchNorm1d(4*nhid)
+        self.fc2 = nn.Linear(4*nhid,nhid)
+        self.bn5 = nn.BatchNorm1d(nhid)
+        self.fc3 = nn.Linear(nhid,nclass)
         
     def forward(self, x, adj):
         x1 = self.gc1(x, adj)
-        x1 = F.relu(self.bn1(x1.transpose(2,1))) # batch_size * 1024 * nhid
+        x1 = F.relu(self.bn1(x1.transpose(2,1)))
         x1 = x1.transpose(2,1)
-
-        # x4 = self.gc4(x1, adj)
-        # x4 = F.relu(self.bn4(x4.transpose(2,1))) # batch_size * 1024 * nhid
-        # x4 = x4.transpose(2,1)
+        x1 = self.cat_feat(x1,self.readout(x1,mean = False)) # b*n* 2hid
 
         x2 = self.gc2(x1, adj)
-        x2 = F.relu(self.bn2(x2.transpose(2,1))) #batch_size * 512 * nhid
+        x2 = F.relu(self.bn2(x2.transpose(2,1))) 
         x2 = x2.transpose(2,1)
+        x2 = self.cat_feat(x2,self.readout(x2,mean = False)) # b*n* 4hid
 
         x3 = self.gc3(x2,adj)
         x3 = F.relu(self.bn3(x3.transpose(2,1))) 
         x3 = x3.transpose(2,1)
-        
-        x = torch.cat([self.readout(x1), self.readout(x2),self.readout(x3)],dim = 1)
+        x3 = self.cat_feat(x3,self.readout(x3,mean = False)) 
+
+        x4 = self.gc4(x3,adj)
+        x4 = F.relu(self.bn0(x4.transpose(2,1))) 
+        x4 = x4.transpose(2,1)
+        x4 = self.readout(x4,mean = True)
+
+        x = x4
         x = F.relu(self.bn4(self.fc1(x))) 
         x = F.relu(self.bn5(self.fc2(x)))
         x = self.fc3(x)
         return F.log_softmax(x, dim=1)
+
+    # def forward(self, x, adj):
+        # x1 = self.gc1(x, adj)
+        # x1 = F.relu(self.bn1(x1.transpose(2,1))) # batch_size * 1024 * nhid
+        # x1 = x1.transpose(2,1)
+
+        # x4 = self.gc4(x1, adj)
+        # x4 = F.relu(self.bn6(x4.transpose(2,1))) # batch_size * 1024 * nhid
+        # x4 = x4.transpose(2,1)
+
+        # x2 = self.gc2(x4, adj)
+        # x2 = F.relu(self.bn2(x2.transpose(2,1))) #batch_size * 512 * nhid
+        # x2 = x2.transpose(2,1)
+
+        # x3 = self.gc3(x2,adj)
+        # x3 = F.relu(self.bn3(x3.transpose(2,1))) 
+        # x3 = x3.transpose(2,1)
+        
+        # x = torch.cat([self.readout(x1), self.readout(x4), self.readout(x2),self.readout(x3)],dim = 1)
+        # x = F.relu(self.bn4(self.fc1(x))) 
+        # x = F.relu(self.bn5(self.fc2(x)))
+        # x = self.fc3(x)
+        # return F.log_softmax(x, dim=1)
     
     @staticmethod
-    def readout(x):
+    def readout(x,mean = True):
         '''
         batch * num * features ->batch * (2*features)
         '''
         x_max = x.max(dim = 1)[0]
         x_mean = x.mean(dim = 1) 
-        return torch.cat([x_mean,x_max],dim = 1)
+        if mean:
+            return torch.cat([x_mean,x_max],dim = 1)
+        return x_max
+    @staticmethod
+    def cat_feat(x,x_feature):
+        '''
+        x:batch_size * num_points * feat
+        x_feature:batch_size * feat
+        '''
+        x_feature = x_feature.unsqueeze(1).repeat(1,x.shape[1],1)
+        x = torch.cat([x,x_feature],dim = 2)
+        return x
 
 class PointNet(nn.Module):
     def __init__(self, nfeat, nhid, nclass, dropout):
