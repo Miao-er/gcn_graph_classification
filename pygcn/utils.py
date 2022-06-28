@@ -67,23 +67,15 @@ def translate_pointcloud(pointcloud):
     # xyz2 = np.random.uniform(low=-0.2, high=0.2, size=[3])
        
     # translated_pointcloud = np.add(np.multiply(pointcloud, xyz1), xyz2).astype('float32')
+
     x_max = pointcloud.max(axis = 0)
     x_min = pointcloud.min(axis = 0)
-    # scale = x_max - x_min
-    # scale[np.abs(scale) < 1e-10] = 1
-    #translated_pointcloud = (pointcloud - x_min)/scale #[0~1]^3
     x_mid = (x_max + x_min)/2
     pointcloud = pointcloud - x_mid
     scale = pointcloud.max()
     translated_pointcloud = pointcloud / scale
 
     return translated_pointcloud
-
-def jitter_pointcloud(pointcloud, sigma=0.01, clip=0.02):
-    N, C = pointcloud.shape
-    pointcloud += np.clip(sigma * np.random.randn(N, C), -1*clip, clip)
-    return pointcloud
-
 
 class ModelNet40(Dataset):
     def __init__(self, num_points, partition='train'):
@@ -95,7 +87,6 @@ class ModelNet40(Dataset):
     def __getitem__(self, item):
         pointcloud = self.data[item][:self.num_points]
         label = self.label[item]
-
         pointcloud = translate_pointcloud(pointcloud)
         if self.partition == 'train':
             np.random.shuffle(pointcloud)
@@ -123,7 +114,7 @@ def knn(x, k):
     pairwise_distance = -xx - inner - xx.transpose(2, 1) # (a-b)^2 = a^2 + b^2 -2ab
  
     val,idx = pairwise_distance.topk(k=k, dim=-1)   # (batch_size, num_points, k)
-    # weight = torch.exp(pairwise_distance)
+    #weight = torch.exp(pairwise_distance)
     batch_size,num_points,feat_dim = x.shape
     idx = idx.reshape(batch_size * num_points,-1)
     idx_base = torch.arange(0,batch_size * num_points).view(-1,1)*num_points
@@ -137,7 +128,6 @@ def knn(x, k):
     mask[idx] = 1.0
     mask = mask.reshape(batch_size,num_points,num_points)
     return mask
-    #return weight,idx
 
 def build_graph(batch_data,k):
     '''
@@ -165,6 +155,3 @@ def accuracy(output, labels):
     correct = preds.eq(labels).double()
     correct = correct.sum()
     return correct.item() , len(labels)
-
-if __name__ == '__main__':
-    print(row_entropy_loss(a))

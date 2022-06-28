@@ -41,9 +41,9 @@ parser.add_argument('--test_mode', action='store_true', default=False,
 parser.add_argument('--trained', action='store_true', default=False, 
                     help='trained using saved model.')
 parser.add_argument('--last_epoch', type = int, default= -1, 
-                    help='trained using saved model.')
+                    help='checkpoint.')
 parser.add_argument('--logger', type = str, default='../log/train.log', 
-                    help='log the training process.')
+                    help='the training log.')
 parser.add_argument('--save_model', type = str, default='../train_model/model.pt', 
                     help='save trained model path.')
 parser.add_argument('--best_model', type = str, default='../best_model/model.pt', 
@@ -93,7 +93,7 @@ def train(epoch,best_accuracy = 0):
             labels = labels.cuda()
         adj_matrix = build_graph(data, k = args.knn_param)
         output = model(data, adj_matrix)
-        loss_train = F.nll_loss(output, labels) #+ loss
+        loss_train = F.nll_loss(output, labels)
         correct,num = accuracy(output, labels)
         loss_train.backward() 
 
@@ -133,7 +133,7 @@ def test():
             labels = labels.cuda()
         adj_matrix = build_graph(data,k = args.knn_param)
         output = model(data, adj_matrix) #batch_size * nclass
-        loss_test = F.nll_loss(output, labels)# + loss
+        loss_test = F.nll_loss(output, labels)
         correct,num = accuracy(output, labels)
         data_num += num
         all_corr += correct

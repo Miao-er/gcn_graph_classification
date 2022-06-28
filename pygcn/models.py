@@ -8,68 +8,48 @@ class GCN(nn.Module):
     def __init__(self, nfeat, nhid, nclass, dropout):
         super(GCN, self).__init__()
         self.gc1 = GraphConvolution(nfeat, nhid,bias = True)
-        self.gc4 = GraphConvolution(nhid, nhid,bias = True)
-        self.gc2 = GraphConvolution(nhid, 2*nhid,bias = True)
+        #self.gc4 = GraphConvolution(nfeat, nhid,bias = True)
+        self.gc2 = GraphConvolution(nhid, 2 * nhid,bias = True)
+        self.gc3 = GraphConvolution(2 * nhid, 4 * nhid,bias = True)
         #self.gc3 = GraphConvolution(2 * nhid, 4*nhid,bias = True)
         self.bn1 = nn.BatchNorm1d(nhid)
-        self.bn4 = nn.BatchNorm1d(nhid)
         self.bn2 = nn.BatchNorm1d(2 * nhid)
-        #self.bn3 = nn.BatchNorm1d(4 * nhid)
+        self.bn3 = nn.BatchNorm1d(4 * nhid)
 
-        self.pool1 = GraphPooling(4 * nhid,ratio = 0.5)
-        # self.pool2 = GraphPooling(nhid,ratio = 0.5)
-        #self.pool3 = GraphPooling(nhid,ratio = 0.5)
+        self.pool1 = GraphPooling(nhid,ratio = 0.5)
+        self.pool2 = GraphPooling(2 * nhid,ratio = 0.5)
+        self.pool3 = GraphPooling(4 * nhid,ratio = 0.5)
 
-        self.fc1 = nn.Linear(8*nhid,4*nhid,bias = True)
-        # self.fc2 = nn.Linear(8*nhid,2*nhid,bias = True)
-        self.fc3 = nn.Linear(4*nhid,nclass,bias = True)
+
+        self.fc1 = nn.Linear(14 * nhid,7 * nhid,bias = True)
+        self.fc2 = nn.Linear(7 * nhid,4 * nhid,bias = True)
+        self.fc3 = nn.Linear( 4 * nhid,nclass,bias = True)
+        self.bn4 = nn.BatchNorm1d(7 * nhid)
         self.bn5 = nn.BatchNorm1d(4 * nhid)
-        # self.bn6 = nn.BatchNorm1d(2 * nhid)
-
-    def forward(self,x,adj):
+        self.dp = nn.Dropout(dropout)
+        
+    def forward(self, x, adj):
         x1 = self.gc1(x, adj)
-        x1 = F.leaky_relu(self.bn1(x1.transpose(2,1)),negative_slope = 0) # batch_size * 1024 * nhid
+        x1 = F.relu(self.bn1(x1.transpose(2,1))) # batch_size * 1024 * nhid
         x1 = x1.transpose(2,1)
 
-        x4 = self.gc4(x1, adj)
-        x4 = F.leaky_relu(self.bn4(x4.transpose(2,1)),negative_slope = 0) # batch_size * 1024 * nhid
-        x4 = x4.transpose(2,1)
+        # x4 = self.gc4(x1, adj)
+        # x4 = F.relu(self.bn4(x4.transpose(2,1))) # batch_size * 1024 * nhid
+        # x4 = x4.transpose(2,1)
 
-        x2 = self.gc2(x4, adj)
-        x2 = F.leaky_relu(self.bn2(x2.transpose(2,1)),negative_slope = 0) #batch_size * 512 * nhid
+        x2 = self.gc2(x1, adj)
+        x2 = F.relu(self.bn2(x2.transpose(2,1))) #batch_size * 512 * nhid
         x2 = x2.transpose(2,1)
 
-        x = torch.cat([x1,x4,x2],dim = 2) # 4 * nhid
-        x,adj = self.pool1(x,adj)
-        x = self.readout(x) # 8 * nhid
-         #x = self.readout(x1) + self.readout(x2) #+ self.readout(x3)
-        x = F.leaky_relu(self.bn5(self.fc1(x)),negative_slope = 0) #batch_size * 128
+        x3 = self.gc3(x2,adj)
+        x3 = F.relu(self.bn3(x3.transpose(2,1))) 
+        x3 = x3.transpose(2,1)
+        
+        x = torch.cat([self.readout(x1), self.readout(x2),self.readout(x3)],dim = 1)
+        x = F.relu(self.bn4(self.fc1(x))) 
+        x = F.relu(self.bn5(self.fc2(x)))
         x = self.fc3(x)
         return F.log_softmax(x, dim=1)
-        
-    # def forward(self, x, adj):
-    #     x1 = self.gc1(x, adj)
-    #     x1 = F.leaky_relu(self.bn1(x1.transpose(2,1)),negative_slope = 0) # batch_size * 1024 * nhid
-    #     x1 = x1.transpose(2,1)
-
-    #     x4 = self.gc4(x1, adj)
-    #     x4 = F.leaky_relu(self.bn4(x4.transpose(2,1)),negative_slope = 0) # batch_size * 1024 * nhid
-    #     x4 = x4.transpose(2,1)
-
-    #     x2 = self.gc2(x4, adj)
-    #     x2 = F.leaky_relu(self.bn2(x2.transpose(2,1)),negative_slope = 0) #batch_size * 512 * nhid
-    #     x2 = x2.transpose(2,1)
-
-    #     x3 = self.gc3(x2,adj)
-    #     #x3,adj = self.pool3(x3,adj)
-    #     x3 = F.leaky_relu(self.bn3(x3.transpose(2,1)),negative_slope = 0) 
-    #     x3 = x3.transpose(2,1)
-        
-    #     #x = self.readout(x1) + self.readout(x2) #+ self.readout(x3)
-    #     x = torch.cat([self.readout(x1),self.readout(x4), self.readout(x2),self.readout(x3)],dim = 1)#,self.readout(x3)
-    #     x = F.leaky_relu(self.bn5(self.fc1(x)),negative_slope = 0) #batch_size * 128
-    #     x = self.fc3(x)
-    #     return F.log_softmax(x, dim=1)
     
     @staticmethod
     def readout(x):
@@ -171,9 +151,9 @@ class DGCNN(nn.Module):
         x2 = F.adaptive_avg_pool1d(x, 1).view(batch_size, -1)
         x = torch.cat((x1, x2), 1)
 
-        x = F.leaky_relu(self.bn6(self.linear1(x)), negative_slope=0.2)
+        x = F.relu(self.bn6(self.linear1(x)), negative_slope=0.2)
         x = self.dp1(x)
-        x = F.leaky_relu(self.bn7(self.linear2(x)), negative_slope=0.2)
+        x = F.relu(self.bn7(self.linear2(x)), negative_slope=0.2)
         x = self.dp2(x)
         x = self.linear3(x)
         return F.log_softmax(x, dim=1)

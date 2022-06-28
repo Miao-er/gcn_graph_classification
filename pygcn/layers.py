@@ -76,8 +76,4 @@ class GraphPooling(Module):
         adj = adj[seq,:,idx.T].transpose(0,1) #根据idx取子图邻接矩阵的列
         return x,adj
 
-if __name__ == "__main__":
-    a = torch.tensor([[[1,2],[3,4],[5,6]],[[6,5],[4,3],[2,1]]])#2*3*2
-    b = torch.tensor([[1,2,3],[4,5,6]])
-    print(a * b.unsqueeze(2))
 
