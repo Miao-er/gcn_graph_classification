@@ -30,34 +30,37 @@ class GCN(nn.Module):
         self.gc4 = GraphConvolution(8 * nhid,8*nhid)
         self.bn0 = nn.BatchNorm1d(8*nhid)
 
-        self.fc1 = nn.Linear(8*nhid,4*nhid)
-        self.bn4 = nn.BatchNorm1d(4*nhid)
-        self.fc2 = nn.Linear(4*nhid,nhid)
-        self.bn5 = nn.BatchNorm1d(nhid)
-        self.fc3 = nn.Linear(nhid,nclass)
+        self.fc1 = nn.Linear(30*nhid,8*nhid)
+        self.bn4 = nn.BatchNorm1d(8*nhid)
+        self.fc2 = nn.Linear(8*nhid,2*nhid)
+        self.bn5 = nn.BatchNorm1d(2*nhid)
+        self.fc3 = nn.Linear(2*nhid,nclass)
         
     def forward(self, x, adj):
         x1 = self.gc1(x, adj)
         x1 = F.relu(self.bn1(x1.transpose(2,1)))
         x1 = x1.transpose(2,1)
+        x1_out = self.readout(x1)
         x1 = self.cat_feat(x1,self.readout(x1,mean = False)) # b*n* 2hid
 
         x2 = self.gc2(x1, adj)
         x2 = F.relu(self.bn2(x2.transpose(2,1))) 
         x2 = x2.transpose(2,1)
+        x2_out = self.readout(x2)
         x2 = self.cat_feat(x2,self.readout(x2,mean = False)) # b*n* 4hid
 
         x3 = self.gc3(x2,adj)
         x3 = F.relu(self.bn3(x3.transpose(2,1))) 
         x3 = x3.transpose(2,1)
-        # x3 = self.cat_feat(x3,self.readout(x3,mean = False)) 
+        x3_out = self.readout(x3)
+        x3 = self.cat_feat(x3,self.readout(x2,mean = False)) 
 
-        # x4 = self.gc4(x3,adj)
-        # x4 = F.relu(self.bn0(x4.transpose(2,1))) 
-        # x4 = x4.transpose(2,1)
-        x4 = self.readout(x3,mean = True)
+        x4 = self.gc4(x3,adj)
+        x4 = F.relu(self.bn0(x4.transpose(2,1))) 
+        x4 = x4.transpose(2,1)
+        x4_out = self.readout(x4)
 
-        x = x4
+        x = torch.cat([x1_out,x2_out,x3_out,x4_out],dim = 1)
         x = F.relu(self.bn4(self.fc1(x))) 
         x = F.relu(self.bn5(self.fc2(x)))
         x = self.fc3(x)
@@ -101,7 +104,7 @@ class PointNet(nn.Module):
         self.dp1 = nn.Dropout(dropout)
         self.linear2 = nn.Linear(512, nclass)
 
-    def forward(self, x):
+    def forward(self, x,adj):
         x = x.transpose(1,2)  #batch_size * feat_dim * num_points
         x = F.relu(self.bn1(self.conv1(x)))
         x = F.relu(self.bn2(self.conv2(x)))
@@ -148,7 +151,7 @@ class DGCNN(nn.Module):
         self.dp2 = nn.Dropout(dropout)
         self.linear3 = nn.Linear(256, nclass)
 
-    def forward(self, x):
+    def forward(self, x,adj):
         x = x.transpose(1,2)
         batch_size = x.size(0)
         x = get_graph_feature(x, k=self.k)
@@ -174,9 +177,9 @@ class DGCNN(nn.Module):
         x2 = F.adaptive_avg_pool1d(x, 1).view(batch_size, -1)
         x = torch.cat((x1, x2), 1)
 
-        x = F.relu(self.bn6(self.linear1(x)), negative_slope=0.2)
+        x = F.leaky_relu(self.bn6(self.linear1(x)), negative_slope=0.2)
         x = self.dp1(x)
-        x = F.relu(self.bn7(self.linear2(x)), negative_slope=0.2)
+        x = F.leaky_relu(self.bn7(self.linear2(x)), negative_slope=0.2)
         x = self.dp2(x)
         x = self.linear3(x)
         return F.log_softmax(x, dim=1)
