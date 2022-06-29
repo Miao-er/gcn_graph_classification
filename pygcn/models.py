@@ -12,11 +12,13 @@ class GCN(nn.Module):
         self.bn2 = nn.BatchNorm1d(2*nhid)
         self.gc3 = GraphConvolution(4 * nhid,4*nhid)
         self.bn3 = nn.BatchNorm1d(4*nhid)
+        self.gc4 = GraphConvolution(8 * nhid,8*nhid)
+        self.bn4 = nn.BatchNorm1d(8*nhid)
 
-        self.fc1 = nn.Linear(8*nhid,4*nhid)
-        self.bn4 = nn.BatchNorm1d(4*nhid)
+        self.fc1 = nn.Linear(16*nhid,4*nhid)
+        self.bn5 = nn.BatchNorm1d(4*nhid)
         self.fc2 = nn.Linear(4*nhid,2*nhid)
-        self.bn5 = nn.BatchNorm1d(2*nhid)
+        self.bn6 = nn.BatchNorm1d(2*nhid)
         self.fc3 = nn.Linear(2*nhid,nclass)
         
     def forward(self, x, adj):
@@ -35,11 +37,16 @@ class GCN(nn.Module):
         x3 = self.gc3(x2,adj)
         x3 = F.relu(self.bn3(x3.transpose(2,1))) 
         x3 = x3.transpose(2,1)
+        x3 = self.cat_feat(x3,self.readout(x3,mean = False)) # b*n* 8hid
 
-        x = self.readout(x3,mean = True)
+        x4 = self.gc4(x3,adj)
+        x4 = F.relu(self.bn4(x4.transpose(2,1))) 
+        x4 = x4.transpose(2,1)
+
+        x = self.readout(x4,mean = True)
         #x = torch.cat([x1_out,x2_out,x3_out],dim = 1)
-        x = F.relu(self.bn4(self.fc1(x))) 
-        x = F.relu(self.bn5(self.fc2(x)))
+        x = F.relu(self.bn5(self.fc1(x))) 
+        x = F.relu(self.bn6(self.fc2(x)))
         x = self.fc3(x)
         return F.log_softmax(x, dim=1)
     
