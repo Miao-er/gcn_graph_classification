@@ -30,7 +30,7 @@ class GCN(nn.Module):
         self.gc4 = GraphConvolution(8 * nhid,8*nhid)
         self.bn0 = nn.BatchNorm1d(8*nhid)
 
-        self.fc1 = nn.Linear(16*nhid,4*nhid)
+        self.fc1 = nn.Linear(8*nhid,4*nhid)
         self.bn4 = nn.BatchNorm1d(4*nhid)
         self.fc2 = nn.Linear(4*nhid,nhid)
         self.bn5 = nn.BatchNorm1d(nhid)
@@ -50,41 +50,18 @@ class GCN(nn.Module):
         x3 = self.gc3(x2,adj)
         x3 = F.relu(self.bn3(x3.transpose(2,1))) 
         x3 = x3.transpose(2,1)
-        x3 = self.cat_feat(x3,self.readout(x3,mean = False)) 
+        # x3 = self.cat_feat(x3,self.readout(x3,mean = False)) 
 
-        x4 = self.gc4(x3,adj)
-        x4 = F.relu(self.bn0(x4.transpose(2,1))) 
-        x4 = x4.transpose(2,1)
-        x4 = self.readout(x4,mean = True)
+        # x4 = self.gc4(x3,adj)
+        # x4 = F.relu(self.bn0(x4.transpose(2,1))) 
+        # x4 = x4.transpose(2,1)
+        x4 = self.readout(x3,mean = True)
 
         x = x4
         x = F.relu(self.bn4(self.fc1(x))) 
         x = F.relu(self.bn5(self.fc2(x)))
         x = self.fc3(x)
         return F.log_softmax(x, dim=1)
-
-    # def forward(self, x, adj):
-        # x1 = self.gc1(x, adj)
-        # x1 = F.relu(self.bn1(x1.transpose(2,1))) # batch_size * 1024 * nhid
-        # x1 = x1.transpose(2,1)
-
-        # x4 = self.gc4(x1, adj)
-        # x4 = F.relu(self.bn6(x4.transpose(2,1))) # batch_size * 1024 * nhid
-        # x4 = x4.transpose(2,1)
-
-        # x2 = self.gc2(x4, adj)
-        # x2 = F.relu(self.bn2(x2.transpose(2,1))) #batch_size * 512 * nhid
-        # x2 = x2.transpose(2,1)
-
-        # x3 = self.gc3(x2,adj)
-        # x3 = F.relu(self.bn3(x3.transpose(2,1))) 
-        # x3 = x3.transpose(2,1)
-        
-        # x = torch.cat([self.readout(x1), self.readout(x4), self.readout(x2),self.readout(x3)],dim = 1)
-        # x = F.relu(self.bn4(self.fc1(x))) 
-        # x = F.relu(self.bn5(self.fc2(x)))
-        # x = self.fc3(x)
-        # return F.log_softmax(x, dim=1)
     
     @staticmethod
     def readout(x,mean = True):

@@ -129,7 +129,7 @@ def build_graph(batch_data,k):
     adj = knn(batch_data,k = k)
     adj_T = adj.transpose(2,1)
     adj = adj + adj_T.mul((adj_T > adj).float()) - adj.mul((adj_T > adj).float())
-    adj = normalize(adj +torch.eye(adj.shape[1]).to(torch.device('cuda')))
+    adj = normalize(adj)# +torch.eye(adj.shape[1]).to(torch.device('cuda')))
     return adj
     
 
@@ -147,3 +147,21 @@ def accuracy(output, labels):
     correct = preds.eq(labels).double()
     correct = correct.sum()
     return correct.item() , len(labels)
+
+def class_accuracy(class_map,output = None,labels = None):
+    if labels is not None:
+        preds = output.max(1)[1].type_as(labels)
+        correct = preds.eq(labels).double()
+        for corr,label in zip(correct,labels):
+            class_map[label.item()][0] += corr.item()
+            class_map[label.item()][1] += 1
+    else:
+        new_map = {}
+        for label,count in class_map.items():
+            try:
+                new_map[label] = count[0]/count[1]
+            except:
+                new_map[label] = 0
+            finally:
+                print(f'label:{label},accuracy:{new_map[label]}')
+        return new_map

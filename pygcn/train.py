@@ -9,7 +9,7 @@ import torch
 import torch.nn.functional as F
 import torch.optim as optim
 
-from utils import load_data, accuracy,build_graph,get_logger
+from utils import *
 from models import GCN,PointNet,DGCNN
 # Training settings
 parser = argparse.ArgumentParser()
@@ -126,6 +126,7 @@ def test():
     all_loss = []
     all_corr = 0
     data_num = 0
+    class_map = {key:[0,0] for key in range(40)}
     for data,labels in test_loader:
         t = time.time()
         if args.cuda:
@@ -135,6 +136,8 @@ def test():
         output = model(data, adj_matrix) #batch_size * nclass
         loss_test = F.nll_loss(output, labels)
         correct,num = accuracy(output, labels)
+        class_accuracy(class_map,output,labels)
+
         data_num += num
         all_corr += correct
         all_loss.append(loss_test)
@@ -143,6 +146,8 @@ def test():
           "loss= {:.4f} ".format(torch.tensor(all_loss).mean().item()) + 
           "accuracy= {:.4f}".format(all_corr / data_num))
 
+    class_map = class_accuracy(class_map)
+    logger.info(f'mean class accuracy:{np.mean(list(class_map.values()))}')
 
 # Train model
 if not args.test_mode:
