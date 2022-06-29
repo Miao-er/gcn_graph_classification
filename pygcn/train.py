@@ -25,7 +25,7 @@ parser.add_argument('--dropout', type=float, default=0.5,
 
 parser.add_argument('--epochs', type=int, default=60,  #训练epoch
                     help='Number of epochs to train.')
-parser.add_argument('--lr', type=float, default= 0.01, #学习率
+parser.add_argument('--lr', type=float, default= 0.001, #学习率
                     help='Initial learning rate.')
 parser.add_argument('--batch_size', type=int, default=64, 
                     help='batch size.')

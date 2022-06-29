@@ -6,33 +6,18 @@ from layers import GraphConvolution
 class GCN(nn.Module):
     def __init__(self, nfeat, nhid, nclass, dropout):
         super(GCN, self).__init__()
-        # self.gc1 = GraphConvolution(nfeat, nhid,bias = True)
-        # self.gc4 = GraphConvolution(nhid, nhid,bias = True)
-        # self.gc2 = GraphConvolution(nhid, 2 * nhid,bias = True)
-        # self.gc3 = GraphConvolution(2 * nhid, 4 * nhid,bias = True)
-
-        # self.bn1 = nn.BatchNorm1d(nhid)
-        # self.bn6 = nn.BatchNorm1d(nhid)
-        # self.bn2 = nn.BatchNorm1d(2 * nhid)
-        # self.bn3 = nn.BatchNorm1d(4 * nhid)
-
-        # self.fc1 = nn.Linear(16 * nhid,8 * nhid,bias = True)
-        # self.fc2 = nn.Linear(8 * nhid,4 * nhid,bias = True)
-        # self.fc3 = nn.Linear( 4 * nhid,nclass,bias = True)
-        # self.bn4 = nn.BatchNorm1d(8 * nhid)
-        # self.bn5 = nn.BatchNorm1d(4 * nhid)
         self.gc1 = GraphConvolution(nfeat,nhid)
         self.bn1 = nn.BatchNorm1d(nhid)
-        self.gc2 = GraphConvolution(2 * nhid,4*nhid)
-        self.bn2 = nn.BatchNorm1d(4*nhid)
-        self.gc3 = GraphConvolution(8 * nhid,16*nhid)
-        self.bn3 = nn.BatchNorm1d(16*nhid)
+        self.gc2 = GraphConvolution(2 * nhid,2*nhid)
+        self.bn2 = nn.BatchNorm1d(2*nhid)
+        self.gc3 = GraphConvolution(4 * nhid,4*nhid)
+        self.bn3 = nn.BatchNorm1d(4*nhid)
 
-        self.fc1 = nn.Linear(16*nhid,8*nhid)
-        self.bn4 = nn.BatchNorm1d(8*nhid)
-        self.fc2 = nn.Linear(8*nhid,4*nhid)
-        self.bn5 = nn.BatchNorm1d(4*nhid)
-        self.fc3 = nn.Linear(4*nhid,nclass)
+        self.fc1 = nn.Linear(8*nhid,4*nhid)
+        self.bn4 = nn.BatchNorm1d(4*nhid)
+        self.fc2 = nn.Linear(4*nhid,2*nhid)
+        self.bn5 = nn.BatchNorm1d(2*nhid)
+        self.fc3 = nn.Linear(2*nhid,nclass)
         
     def forward(self, x, adj):
         x1 = self.gc1(x, adj)
@@ -50,9 +35,8 @@ class GCN(nn.Module):
         x3 = self.gc3(x2,adj)
         x3 = F.relu(self.bn3(x3.transpose(2,1))) 
         x3 = x3.transpose(2,1)
-        #x3_out = self.readout(x3)
 
-        x = self.readout(x3,mean = False)
+        x = self.readout(x3,mean = True)
         #x = torch.cat([x1_out,x2_out,x3_out],dim = 1)
         x = F.relu(self.bn4(self.fc1(x))) 
         x = F.relu(self.bn5(self.fc2(x)))

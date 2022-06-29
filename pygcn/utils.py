@@ -31,6 +31,7 @@ def get_logger(filename, verbosity=1, name=None):
     return logger
 
 def download():
+    # gcn_graph_classification/data/...
     PATH = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     DATA_DIR = PATH + '/data/modelnet40_ply_hdf5_2048'
     if not os.path.exists(DATA_DIR):
@@ -44,7 +45,7 @@ def download():
 
 def load_raw_data(partition):
     '''
-    train:9840
+    train:9843
     test:2468
     label class:40
     '''
@@ -162,6 +163,6 @@ def class_accuracy(class_map,output = None,labels = None):
                 new_map[label] = count[0]/count[1]
             except:
                 new_map[label] = 0
-            finally:
-                print(f'label:{label},accuracy:{new_map[label]}')
+            #finally:
+                #print(f'label:{label},accuracy:{new_map[label]}')
         return new_map
